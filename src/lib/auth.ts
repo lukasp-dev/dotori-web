@@ -3,6 +3,19 @@ import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "@/lib/prisma";
 import type { AdapterUser } from "next-auth/adapters";
 import type { Session } from "next-auth";
+import type { SessionStrategy } from "next-auth";
+
+// Extend the Session type to include id
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
+}
 
 export const authConfig = {
   debug: true,
@@ -14,7 +27,7 @@ export const authConfig = {
     }),
   ],
   session: {
-    strategy: "database",
+    strategy: "database" as SessionStrategy,
   },
   callbacks: {
     async session({ session, user }: { session: Session; user: AdapterUser }) {
@@ -25,4 +38,3 @@ export const authConfig = {
     },
   },
 };
-
