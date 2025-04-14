@@ -5,7 +5,7 @@ import images from "@/constants/images.json";
 import styled, { css } from "styled-components";
 import { useInView } from "react-intersection-observer";
 
-// 📱 모바일 반응형 헬퍼
+// mobile reponsive helper
 const mobile = css`
   @media (max-width: 600px) {
     ${(props: any) => css`
@@ -17,7 +17,7 @@ const mobile = css`
   }
 `;
 
-// 💡 애니메이션 + 반응형 이미지 컴포넌트 스타일
+// animation + responsive style
 const ImageElement = styled.div<{
   $top?: string;
   $left?: string;
@@ -78,7 +78,7 @@ const ImageElement = styled.div<{
   }
 `;
 
-// 🖼️ 감지된 후 나타나는 이미지 컴포넌트
+// animated components
 const AnimatedImage = ({
   src,
   alt,
@@ -116,7 +116,7 @@ const AnimatedImage = ({
   );
 };
 
-// 🌱 메인 컴포넌트
+// main component
 const SceneWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
@@ -126,7 +126,7 @@ const SceneWrapper = styled.div`
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 6rem 0;
+  padding: 8rem 0;
 
   @media (max-width: 1024px) {
     flex-direction: column;
@@ -178,7 +178,7 @@ const TextParagraph = styled.p<{ $visible: boolean }>`
   `}
 `;
 
-// 🎨 이미지 컨테이너
+// image container
 const ImageContainer = styled.div`
   flex: 1;
   position: relative;
@@ -204,7 +204,7 @@ const GrowingTori = () => {
   return (
     <SceneWrapper>
       <ImageContainer>
-        {/* 배경 도로 */}
+        {/* road in the background */}
         <ImageElement $width="100%" $height="100%" $zIndex={1} $visible>
           <Image
             src={images["road"]}
@@ -215,7 +215,7 @@ const GrowingTori = () => {
           />
         </ImageElement>
 
-        {/* 왼쪽 나무 */}
+        {/* the tree at the left bottom */}
         <AnimatedImage
           src={images["tree"]}
           alt="Tree"
@@ -233,7 +233,7 @@ const GrowingTori = () => {
           $zIndex={2}
         />
 
-        {/* 아래쪽 달리는 토리 */}
+        {/* running tori at the bottom */}
         <AnimatedImage
           src={images["tori_running"]}
           alt="Running Tori"
@@ -251,7 +251,7 @@ const GrowingTori = () => {
           $zIndex={3}
         />
 
-        {/* 오른쪽 그루터기 위 토리 */}
+        {/* Rori on the stump */}
         <AnimatedImage
           src={images["stump-low"]}
           alt="Stump"
@@ -287,12 +287,12 @@ const GrowingTori = () => {
           $hideOnMobile
         />
 
-        {/* 위쪽 도토리 든 토리 */}
+        {/* Tori with dotori */}
         <AnimatedImage
           src={images["tori_with_acorn"]}
           alt="Tori with acorn"
-          $top="-20px"
-          $left="10%"
+          $top="0px"
+          $left="6%"
           $mobileLeft="5%"
           $width="150px"
           $height="150px"

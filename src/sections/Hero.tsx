@@ -12,7 +12,9 @@ const Wrapper = styled.section`
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 6rem 1rem;
+  padding-bottom: 6rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
