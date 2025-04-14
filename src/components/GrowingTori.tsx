@@ -163,6 +163,7 @@ const TextParagraph = styled.p<{ $visible: boolean }>`
   transform: translateY(20px);
   transition: opacity 1.5s ease, transform 1.5s ease;
   margin-bottom: 15rem;
+  font-weight: 800;
   color: ${(props) => props.theme.colors.textPrimary};
 
   &:last-child {
