@@ -28,6 +28,7 @@ const TopCard = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     grid-column: span 1;
+    row-gap: 2rem;
   }
 `;
 

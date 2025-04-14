@@ -4,7 +4,6 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import styled from "styled-components";
 import { GoogleButton, Input, Divider } from "@/components";
-import images from "@/constants/images.json";
 
 const Container = styled.div`
   display: flex;

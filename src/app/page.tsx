@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import Strengths from "@/sections/Strengths";
 import Hero from "@/sections/Hero";
+import GrowingTori from "@/components/GrowingTori";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -30,6 +31,7 @@ export default function Home() {
       <Main>
         <Hero />
         <Strengths />
+        <GrowingTori />
       </Main>
     </Wrapper>
   );

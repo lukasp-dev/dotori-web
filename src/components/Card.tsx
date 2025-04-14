@@ -27,6 +27,17 @@ const CardWrapper = styled.div`
     box-shadow: 0 0 20px rgba(112, 74, 30, 0.3);
     z-index: 999;
   }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 90%;
+    margin: 0 auto;
+    border: 1px solid ${({ theme }) => theme.colors.border};
+    border-radius: 5px;
+  }
 `;
 
 const TextWrapper = styled.div`
@@ -35,6 +46,11 @@ const TextWrapper = styled.div`
   gap: 0.4rem;
   flex: 1;
   min-width: 0;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Title = styled.h2`

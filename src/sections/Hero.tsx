@@ -26,8 +26,8 @@ const HeroImage = styled.div`
   position: relative;
 
   @media (max-width: 768px) {
-    width: 400;
-    height: 400px;
+    width: 300px;
+    height: 300px;
   }
 `;
 

@@ -6,8 +6,8 @@
   "leaf": "https://storage.googleapis.com/dotori-public-assets/images/leaf.png",
   "mushroom": "https://storage.googleapis.com/dotori-public-assets/images/mushroom.png",
   "rock": "https://storage.googleapis.com/dotori-public-assets/images/rock.png",
-  "stump-tall": "https://storage.googleapis.com/dotori-public-assets/stump.png",
-  "stump-low": "https://storage.googleapis.com/dotori-public-assets/stump2.png",
+  "stump-tall": "https://storage.googleapis.com/dotori-public-assets/images/tump.png",
+  "stump-low": "https://storage.googleapis.com/dotori-public-assets/images/stump2.png",
   "tori": "https://storage.googleapis.com/dotori-public-assets/images/tori.png",
   "tori-face": "https://storage.googleapis.com/dotori-public-assets/tori_face.png",
   "tree": "https://storage.googleapis.com/dotori-public-assets/images/tree.png",
@@ -17,5 +17,8 @@
   "resume_icon": "https://storage.googleapis.com/dotori-public-assets/images/resume_icon.png",
   "scrutinize_icon": "https://storage.googleapis.com/dotori-public-assets/images/scrutinize_icon.png",
   "chat_icon": "https://storage.googleapis.com/dotori-public-assets/images/chat_icon.png",
-  "hero_img": "https://storage.googleapis.com/dotori-public-assets/images/hero_img.png"
+  "hero_img": "https://storage.googleapis.com/dotori-public-assets/images/hero_img.png",
+  "tori_running": "https://storage.googleapis.com/dotori-public-assets/images/tori_running.png",
+  "tori_with_acorn": "https://storage.googleapis.com/dotori-public-assets/images/tori_with_acorn.png",
+  "road": "https://storage.googleapis.com/dotori-public-assets/images/road.png"
 }
