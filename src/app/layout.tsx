@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans_KR } from "next/font/google";
+import { Providers } from "./providers";
+import ConditionalHeader from "@/components/ConditionalHeader";
 import "./globals.css";
+import { StyledComponentsRegistry } from "@/lib/styled-components-registry";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-noto-sans",
 });
 
 export const metadata: Metadata = {
@@ -23,11 +22,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="ko">
+      <body className={`${notoSansKr.variable} antialiased`}>
+        <StyledComponentsRegistry suppressHydrationWarning>
+          <Providers>
+            <ConditionalHeader />
+            {children}
+          </Providers>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
