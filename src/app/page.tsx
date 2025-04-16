@@ -1,5 +1,6 @@
 "use client";
 import styled from "styled-components";
+import ResumePrompt from "@/components/ResumePrompt";
 import Strengths from "@/sections/Strengths";
 import Hero from "@/sections/Hero";
 import GrowingTori from "@/components/GrowingTori";
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.main`
-  margin-top: 3rem;
+  margin-top: 10rem;
   text-align: center;
 `;
 
@@ -29,6 +30,7 @@ export default function Home() {
   return (
     <Wrapper>
       <Main>
+        <ResumePrompt />
         <Hero />
         <Strengths />
         <GrowingTori />
