@@ -9,11 +9,18 @@ import images from "@/constants/images.json";
 import Hamburger from "@/components/Hamburger"; // hamburger import
 
 const HeaderWrapper = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
 
   @media (max-width: 640px) {
     padding: 1rem;
@@ -24,6 +31,7 @@ const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  height: 3rem;
 `;
 
 const Nav = styled.nav<{ $isOpen: boolean }>`
@@ -85,10 +93,10 @@ const Header = () => {
       <LogoWrapper>
         <Link href="/">
           <Image
-            src={images["dotori-square-logo"]}
+            src={images["dotori-name-invisible-back"]}
             alt="Dotori Logo"
-            width={40}
-            height={40}
+            width={100}
+            height={35}
           />
         </Link>
       </LogoWrapper>
@@ -96,6 +104,7 @@ const Header = () => {
       <Hamburger open={menuOpen} onClick={() => setMenuOpen((prev) => !prev)} />
 
       <Nav $isOpen={menuOpen}>
+        <NavLink as="a" href="https://dotori-intro-website.vercel.app/" target="_blank" rel="noopener noreferrer">about</NavLink>
         <NavLink href="/pricing">pricing</NavLink>
         <NavLink href="/how-to-dotori">how to dotori</NavLink>
 

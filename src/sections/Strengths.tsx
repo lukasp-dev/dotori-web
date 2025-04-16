@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import InfoCard from "../components/Card";
+import InfoCard from "@/components/common/Card";
 import images from "@/constants/images.json";
 
 const Container = styled.section`
