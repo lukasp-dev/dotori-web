@@ -1,19 +1,25 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { useState } from "react";
 import styled from "styled-components";
-import UploadModal from "@/components/common/UploadModal";
+
+interface UploadPromptProps {
+  title: string;
+  message: string;
+  buttonLabel: string;
+  onClick: () => void;
+}
 
 const PromptWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.white};
   padding: 1.5rem;
-  border-left: 4px solid ${(props) => props.theme.colors.primary}; 
+  border-left: 4px solid ${(props) => props.theme.colors.primary};
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   max-width: 40rem;
-  margin: 5rem auto;
+  max-height: 40rem;
+  margin: 5rem auto 5rem auto;
   text-align: center;
+  color: ${(props) => props.theme.colors.textPrimary};
 `;
 
 const Title = styled.h2`
@@ -44,54 +50,13 @@ const UploadButton = styled.button`
   }
 `;
 
-interface UploadPromptProps {
-  title: string;
-  message: string;
-  buttonLabel?: string;
-  uploadConfig: {
-    modalTitle: string;
-    description: string;
-    accept?: string;
-    onUpload: (file: File) => void;
-  };
-}
-
-const UploadPrompt = ({
-  title,
-  message,
-  buttonLabel = "Upload",
-  uploadConfig,
-}: UploadPromptProps) => {
-  const { data: session, status } = useSession();
-  const [showModal, setShowModal] = useState(false);
-
-  if (status === "loading" || !session) return null;
-
-  const handleUpload = (file: File) => {
-    uploadConfig.onUpload(file);
-    setShowModal(false);
-  };
-
+const UploadPrompt = ({ title, message, buttonLabel, onClick }: UploadPromptProps) => {
   return (
-    <>
-      <PromptWrapper>
-        {title && <Title>{title}</Title>}
-        <Message>{message}</Message>
-        <UploadButton onClick={() => setShowModal(true)}>
-          {buttonLabel}
-        </UploadButton>
-      </PromptWrapper>
-
-      {showModal && (
-        <UploadModal
-          title={uploadConfig.modalTitle}
-          description={uploadConfig.description}
-          accept={uploadConfig.accept}
-          onClose={() => setShowModal(false)}
-          onUpload={handleUpload}
-        />
-      )}
-    </>
+    <PromptWrapper>
+      <Title>{title}</Title>
+      <Message>{message}</Message>
+      <UploadButton onClick={onClick}>{buttonLabel}</UploadButton>
+    </PromptWrapper>
   );
 };
 

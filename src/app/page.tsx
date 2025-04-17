@@ -1,5 +1,6 @@
 "use client";
 import styled from "styled-components";
+import ScorePrompt from "@/components/ScorePrompt";
 import ResumePrompt from "@/components/ResumePrompt";
 import Strengths from "@/sections/Strengths";
 import Hero from "@/sections/Hero";
@@ -30,7 +31,7 @@ export default function Home() {
   return (
     <Wrapper>
       <Main>
-        <ResumePrompt />
+        <ScorePrompt />
         <Hero />
         <Strengths />
         <GrowingTori />

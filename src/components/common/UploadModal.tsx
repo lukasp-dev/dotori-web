@@ -19,6 +19,7 @@ const ModalBox = styled.div`
   border-radius: 1rem;
   width: 100%;
   max-width: 600px;
+  margin: 0 1rem;
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   position: relative;
@@ -97,7 +98,11 @@ const UploadModal = ({
   };
 
   return (
-    <Backdrop onClick={onClose}>
+    <Backdrop onClick={(e) => {
+      if (e.target === e.currentTarget) {
+        onClose();
+      }
+     }}>
       <ModalBox onClick={(e) => e.stopPropagation()}>
         <Close onClick={onClose}>x</Close>
         <h2>{title}</h2>
