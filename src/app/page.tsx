@@ -31,6 +31,7 @@ export default function Home() {
   return (
     <Wrapper>
       <Main>
+        <ResumePrompt />
         <ScorePrompt />
         <Hero />
         <Strengths />
