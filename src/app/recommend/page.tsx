@@ -4,8 +4,8 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
-import useRecommendSchool from "@/components/recommend/useRecommendSchool";
-import { useCartStorage } from "@/lib/cart/useCartStorage";
+import useRecommendSchool from "@/hooks/recommend/useRecommendSchool";
+import { useCartStorage } from "@/hooks/cart/useCartStorage";
 import images from "@/constants/images.json";
 
 const RecommendWrapper = styled.div`

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styled from "styled-components";
-import { useCartStorage } from "@/lib/cart/useCartStorage";
+import { useCartStorage } from "@/hooks/cart/useCartStorage";
 import images from "@/constants/images.json";
 
 const CartWrapper = styled.div`
