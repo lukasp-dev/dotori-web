@@ -3,7 +3,6 @@
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store";
-import { removeFromCart } from "@/store/cartSlice";
 import CartItem from "./CartItem";
 import Image from "next/image";
 import images from "@/constants/images.json";
@@ -42,7 +41,6 @@ const CartList = () => {
                     id={item.id}
                     name={item.name}
                     price={item.price}
-                    onRemove={() => dispatch(removeFromCart(item.id))}
                 />
             ))}
         </div>

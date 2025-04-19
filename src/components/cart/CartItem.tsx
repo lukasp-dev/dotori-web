@@ -1,44 +1,73 @@
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "@/store/cartSlice";
 
-const Wrapper = styled.div`
-    padding: 0.75rem;
-    margin: 0.5rem;
-    border-radius: 0.375rem;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0,05);
+interface Props {
+  id: number;
+  name: string;
+  price: number;
+}
+
+const CartItemWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  margin: 0 auto 1rem auto;   
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
-const ItemName = styled.h3`
-  font-weight: 500;
+const Info = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
-const ItemPrice = styled.span`
-  color: gray;
+const SchoolName = styled.h2`
+  margin: 0;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.textPrimary};
+`;
+
+const Price = styled.p`
+  margin: 0.25rem 0 0;
+  color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const RemoveButton = styled.button`
   background: none;
-  border: none;
   color: red;
+  border: none;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: 1rem;
   cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
+const CartItem = ({ id, name, price }: Props) => {
+  const dispatch = useDispatch();
 
-interface Props {
-    id: number;
-    name: string;
-    price: number;
-    onRemove: () => void;
-}
+  const handleRemove = () => {
+    dispatch(removeFromCart(id));
+  };
+  return (
+    <CartItemWrapper>
+      <Info>
+        <SchoolName>{name}</SchoolName>
+        <Price>${price}</Price>
+      </Info>
+      <RemoveButton onClick={handleRemove}>Delete</RemoveButton>
+    </CartItemWrapper>
+  );
+};
 
-const CartItem = ({id, name, price, onRemove}: Props) => {
-    return (
-        <Wrapper>
-            <div>
-                <ItemName>{name}</ItemName>
-                <ItemPrice>${price}</ItemPrice>
-            </div>
-            <RemoveButton>Delete</RemoveButton>
-        </Wrapper>
-    );
-}
 export default CartItem;
