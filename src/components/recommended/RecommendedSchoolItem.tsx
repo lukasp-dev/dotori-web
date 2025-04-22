@@ -7,33 +7,30 @@ const Card = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   padding: 1rem 1.5rem;
-  margin: 0.75rem 0;
-  border: 1px solid #ddd;
+  margin: 0 auto 1rem auto;   
+  background-color: white;
   border-radius: 12px;
-  background-color: #fff;
-  max-width: 600px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  max-width: 40rem;
   width: 100%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  gap: 2rem;
 `;
 
 const Info = styled.div`
   display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
+  flex-direction: column;
 `;
 
 const SchoolWrapper = styled.h2`
-  font-size: 1.1rem;
-  font-weight: bold;
   margin: 0;
+  font-weight: bold;
   color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
 const PriceWrapper = styled.p`
-  font-size: 0.9rem;
-  margin: 0;
+  margin: 0.25rem 0 0;
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 

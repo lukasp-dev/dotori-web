@@ -7,12 +7,18 @@ import { fetchRecommendedSchools } from "@/store/recommendedSchoolsSlice";
 import { addToCart } from "@/store/cartSlice";
 import { RootState, AppDispatch } from "@/store";
 import RecommendedSchoolItem from "./RecommendedSchoolItem";
+import Image from "next/image";
+import images from "@/constants/images.json";
 
-const SchoolList = styled.div`
+const TitleRow = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center; /* 카드들을 가운데 정렬 */
-  gap: 1.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+`;
+
+const Title = styled.h2`
+  color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
 const RecommendedSchoolList = () => {
@@ -27,7 +33,17 @@ const RecommendedSchoolList = () => {
     if(loading) return <p>Loading...</p>
 
     return (
-        <SchoolList>
+        <div>
+            <TitleRow>
+                <Image 
+                    src={images["tori"]}
+                    alt = "dotori logo"
+                    width={95}
+                    height={90}
+                    priority
+                />
+                <Title>Tori picked these Schools for you</Title>
+            </TitleRow>
             {schools.map((school) => (
                 <RecommendedSchoolItem
                     key={school.id}
@@ -35,7 +51,7 @@ const RecommendedSchoolList = () => {
                     onAdd={() => dispatch(addToCart(school))}
                 />
             ))}
-        </SchoolList>
+        </div>
     )
 }
 export default RecommendedSchoolList;

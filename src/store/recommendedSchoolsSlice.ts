@@ -1,6 +1,7 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 
 export const fetchRecommendedSchools = createAsyncThunk(
+    //demo
     "recommendedSchools/fetch",
     async () => {
         return [

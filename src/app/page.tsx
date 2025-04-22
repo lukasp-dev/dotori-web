@@ -5,13 +5,17 @@ import ResumePrompt from "@/components/ResumePrompt";
 import Strengths from "@/sections/Strengths";
 import Hero from "@/sections/Hero";
 import GrowingTori from "@/components/GrowingTori";
+import Footer from "@/components/Footer";
 
 const Wrapper = styled.div`
+  min-height: 100vh;
+  font-family: var(--font-geist-sans);
+`;
+const ContentWrapper = styled.div`
   min-height: 100vh;
   padding: 0.5rem;
   font-family: var(--font-geist-sans);
 `;
-
 const Main = styled.main`
   margin-top: 10rem;
   text-align: center;
@@ -30,13 +34,16 @@ const Paragraph = styled.p`
 export default function Home() {
   return (
     <Wrapper>
-      <Main>
-        <ResumePrompt />
-        <ScorePrompt />
-        <Hero />
-        <Strengths />
-        <GrowingTori />
-      </Main>
+      <ContentWrapper>
+        <Main>
+          <ResumePrompt />
+          <ScorePrompt />
+          <Hero />
+          <Strengths />
+          <GrowingTori />
+        </Main>
+      </ContentWrapper>
+      <Footer/>
     </Wrapper>
   );
 }

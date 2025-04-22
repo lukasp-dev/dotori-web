@@ -16,7 +16,7 @@ const CartItemWrapper = styled.div`
   margin: 0 auto 1rem auto;   
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   max-width: 600px;
   width: 100%;
   box-sizing: border-box;

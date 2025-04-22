@@ -1,42 +1,31 @@
 "use client";
 
-import Link from "next/link";
-import RecommendedSchoolList from "@/components/recommended/RecommendedSchoolList";
 import styled from "styled-components";
-import Image from "next/image";
-import images from "@/constants/images.json";
+import RecommendedSchoolList from "@/components/recommended/RecommendedSchoolList";
+import { useRouter } from "next/navigation";
 
 const Wrapper = styled.div`
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-`;
-const RecommendWrapper = styled.div`
-  max-width: 800px;
-  margin: 6rem auto 1rem auto;
-  display: flex;
-  justify-content: center
-`;
-
-const TitleRow = styled.div`
-  display: flex;
+  justify-content: center; 
   align-items: center;
-  margin-bottom: 1rem;
+  gap: 1.5rem;
+  margin: 0 auto;
+  width: 30rem;
+  max-width: 600px;
+  padding: 0 1rem;
 `;
 
-const Title = styled.h2`
-  color: ${({ theme }) => theme.colors.textPrimary};
-`;
-
-const ListWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+const RecommendWrapper = styled.div`
+  width: 100%;
 `;
 
 const GoToCartWrapper = styled.div`
-  margin-top: 2rem;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const AddButton = styled.button`
@@ -55,27 +44,14 @@ const AddButton = styled.button`
 `;
 
 export default function RecommendPage() {
+  const router = useRouter();
   return (
     <Wrapper>
       <RecommendWrapper>
-        <TitleRow>
-            <Image 
-              src={images["tori"]}
-              alt = "dotori logo"
-              width={95}
-              height={90}
-              priority
-            />
-            <Title>Tori picked these Schools for you</Title>
-        </TitleRow>
-      </RecommendWrapper>
-      <ListWrapper>
         <RecommendedSchoolList/>
-      </ListWrapper>
+      </RecommendWrapper>
       <GoToCartWrapper>
-        <Link href="/cart">
-          <AddButton>Go to Backpack</AddButton>
-        </Link>
+          <AddButton onClick={() => router.push("/cart")}>Go to Backpack</AddButton>
       </GoToCartWrapper>
     </Wrapper>
   );
