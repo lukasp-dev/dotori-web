@@ -12,9 +12,9 @@ interface UploadPromptProps {
 const PromptWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.white};
   padding: 1.5rem;
-  border-left: 4px solid ${(props) => props.theme.colors.primary};
+  border-left: 4px solid ${(props) => props.theme.colors.textSecondary};
   border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   max-width: 40rem;
   max-height: 40rem;
   margin: 5rem auto 5rem auto;
@@ -36,7 +36,7 @@ const Message = styled.p`
 `;
 
 const UploadButton = styled.button`
-  background-color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.textSecondary};
   color: ${(props) => props.theme.colors.white};
   font-weight: 600;
   padding: 0.5rem 1.25rem;
@@ -46,7 +46,7 @@ const UploadButton = styled.button`
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.textSecondary};
+    background-color: ${(props) => props.theme.colors.primary};
   }
 `;
 
