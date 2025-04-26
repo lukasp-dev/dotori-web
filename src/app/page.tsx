@@ -1,7 +1,6 @@
 "use client";
 import styled from "styled-components";
-import ScorePrompt from "@/components/ScorePrompt";
-import ResumePrompt from "@/components/ResumePrompt";
+import AdmissionFlow from "@/components/AdmissionFlow";
 import Strengths from "@/sections/Strengths";
 import Hero from "@/sections/Hero";
 import GrowingTori from "@/components/GrowingTori";
@@ -36,8 +35,7 @@ export default function Home() {
     <Wrapper>
       <ContentWrapper>
         <Main>
-          <ResumePrompt />
-          <ScorePrompt />
+          <AdmissionFlow />
           <Hero />
           <Strengths />
           <GrowingTori />

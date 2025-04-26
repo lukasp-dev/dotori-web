@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
+import { Noto_Sans_KR, Fredoka } from "next/font/google";
 import { Providers } from "./providers";
 import ConditionalHeader from "@/components/ConditionalHeader";
 import "./globals.css";
@@ -9,6 +9,12 @@ const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-noto-sans",
+});
+
+const baloo2 = Fredoka({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-fredoka",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSansKr.variable} antialiased`}>
+      <body className={`${notoSansKr.variable} ${baloo2.variable} antialiased`}>
         <StyledComponentsRegistry suppressHydrationWarning>
           <Providers>
             <ConditionalHeader />

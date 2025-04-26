@@ -2,6 +2,8 @@
 
 import styled from "styled-components";
 import { useState } from "react";
+import { uploadResume } from "@/app/api/auth/uploadResume";
+
 
 const Backdrop = styled.div`
   position: fixed;
@@ -92,13 +94,22 @@ const UploadModal = ({
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = async() => {
     if (!selectedFile) {
       alert("📄 Please select the file first.");
       return;
     }
-    onUpload?.(selectedFile);
-    onClose();
+    try {
+      const url = await uploadResume(selectedFile); // ✅ 실제 API 호출
+      console.log("✅ Uploaded to:", url);
+  
+      // 선택적으로 부모 컴포넌트에 전달
+      onUpload?.(selectedFile);
+  
+      onClose();
+    } catch (err: any) {
+      alert("❌ Upload failed: " + err.message);
+    }
   };
 
   return (

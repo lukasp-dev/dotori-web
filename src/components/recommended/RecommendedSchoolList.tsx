@@ -18,6 +18,8 @@ const TitleRow = styled.div`
 `;
 
 const Title = styled.h2`
+  font-family: var(--font-fredoka);
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
@@ -37,7 +39,7 @@ const RecommendedSchoolList = () => {
             <TitleRow>
                 <Image 
                     src={images["tori"]}
-                    alt = "dotori logo"
+                    alt = "tori"
                     width={95}
                     height={90}
                     priority

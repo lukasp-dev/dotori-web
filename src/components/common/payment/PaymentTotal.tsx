@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 const TotalDisplay = styled.div`
+  font-family: var(--font-fredoka);
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.textPrimary};
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 2rem;

@@ -9,7 +9,7 @@ const Card = styled.div`
   align-items: center;
   padding: 1rem 1.5rem;
   margin: 0 auto 1rem auto;   
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};;
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   max-width: 40rem;
