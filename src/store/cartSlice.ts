@@ -1,12 +1,12 @@
 import{createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-interface School {
+export interface School {
     id: number;
     name: string;
     price: number;
 }
 
-interface CartState {
+export interface CartState {
     items: School[];
     total: number;
   }

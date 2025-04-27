@@ -2,10 +2,14 @@
 
 import { useSession } from "next-auth/react";
 import UploadPrompt from "@/components/common/UploadPrompt";
-import UploadModal from "@/components/common/UploadModal";
+import UploadModal from "@/components/common/modals/UploadModal";
 import { useState } from "react";
 
-const ResumePrompt = () => {
+type ResumePromptProps = {
+  onNext: () => void;
+};
+
+const ResumePrompt = ({ onNext }: ResumePromptProps) => {
   const { data: session, status } = useSession();
   const [showModal, setShowModal] = useState(false);
 
@@ -14,6 +18,7 @@ const ResumePrompt = () => {
   const handleUpload = (file: File) => {
     console.log("Resume uploaded:", file.name);
     setShowModal(false);
+    onNext();
   };
 
   return (

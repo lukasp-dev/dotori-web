@@ -23,8 +23,9 @@ const PromptWrapper = styled.div`
 `;
 
 const Title = styled.h2`
+  font-family: var(--font-fredoka);
+  font-weight: 600;
   font-size: 1.25rem;
-  font-weight: 700;
   margin-bottom: 0.5rem;
   color: ${(props) => props.theme.colors.textPrimary};
 `;
