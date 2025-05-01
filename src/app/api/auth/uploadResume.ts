@@ -13,6 +13,6 @@ export const uploadResume = async (file: File): Promise<string> => {
       throw new Error("Upload failed: " + errorText);
     }
   
-    return await response.text(); // 업로드된 파일의 public URL
+    return await response.text();
   };
   

@@ -5,22 +5,30 @@ import { RootState } from "@/store";
 
 const Card = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 1rem 1.5rem;
-  margin: 0 auto 1rem auto;   
-  background-color: ${({ theme }) => theme.colors.white};;
+  margin: 0 auto 1rem auto;
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  width: 100%;
   max-width: 40rem;
+  box-sizing: border-box;
+  padding: 1rem 1.5rem;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   box-sizing: border-box;
-  gap: 2rem;
 `;
 
 const Info = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 `;
 
 const SchoolWrapper = styled.h2`
@@ -29,14 +37,20 @@ const SchoolWrapper = styled.h2`
   color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
-const PriceWrapper = styled.p`
+const ScoreWrapper = styled.p`
   margin: 0.25rem 0 0;
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
+const Label = styled.span<{ color: string }>`
+  margin-left: 0.5rem;
+  color: ${(props) => props.color};
+  font-weight: bold;
+`;
+
 const AddButton = styled.button.withConfig({
   shouldForwardProp: (prop) => prop !== "added"
-})< { added: boolean } >`
+})<{ added: boolean }>`
   background-color: ${({ added, theme }) =>
     added ? theme.colors.textSecondary : theme.colors.primary};
   color: ${({ theme }) => theme.colors.white};
@@ -46,23 +60,22 @@ const AddButton = styled.button.withConfig({
   border-radius: 0.375rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  width: 8rem;
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.textSecondary};
-  }
+  min-width: 8rem;
+  text-align: center;
+  white-space: nowrap;
 `;
 
 interface Props {
-    school: {
-      id: number;
-      name: string;
-      price: number;
-    };
-    onAdd: () => void;
-  }
-  
-const RecommendedSchoolItem = ({ school}: Props) => {
+  school: {
+    id: number;
+    name: string;
+    score: number;
+  };
+  onAdd: () => void;
+  onRemove?: () => void;
+}
+
+const RecommendedSchoolItem = ({ school }: Props) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const isInCart = cartItems.some((item) => item.id === school.id);
@@ -75,16 +88,30 @@ const RecommendedSchoolItem = ({ school}: Props) => {
     }
   };
 
+  const getCategory = (score: number) => {
+    if (score >= 80) return { label: "Safety", color: "#b0c36d" };
+    if (score >= 60) return { label: "Reach", color: "7e673d" };
+    if (score >= 40) return { label: "Sub-Target", color: "#FFA07A" };
+    return { label: "Target", color: "#F08080" };
+  };
+
+  const { label, color } = getCategory(school.score);
+
   return (
     <Card>
-      <Info>
-        <SchoolWrapper>{school.name}</SchoolWrapper>
-        <PriceWrapper>${school.price}</PriceWrapper>
-      </Info>
-      <AddButton added={isInCart} onClick={handleClick}>
-        {isInCart ? "✅ Added" : "🎒 Backpacking"}
-      </AddButton>
+      <ContentWrapper>
+        <Info>
+          <SchoolWrapper>{school.name}</SchoolWrapper>
+          <ScoreWrapper>
+            Score: {school.score} <Label color={color}>{label}</Label>
+          </ScoreWrapper>
+        </Info>
+        <AddButton added={isInCart} onClick={handleClick}>
+          {isInCart ? "✅ Added" : "Backpacking"}
+        </AddButton>
+      </ContentWrapper>
     </Card>
   );
-}
+};
+
 export default RecommendedSchoolItem;

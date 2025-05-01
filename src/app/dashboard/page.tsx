@@ -4,20 +4,24 @@ import styled from "styled-components";
 import Dashboard from "@/components/dashboard/Dashboard";
 
 const PageWrapper = styled.div`
-  background-color: #FFF8E7;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
   width: 100%;
 `;
 
 const Wrapper = styled.main`
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center; 
-  justify-content: center;
+  justify-content: flex-start; 
   gap: 1rem;
   margin: 0 auto;
-  width: 30rem;
+  width: 100%;
   max-width: 600px;
   padding: 0 1rem;
 `;

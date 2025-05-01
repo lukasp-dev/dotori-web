@@ -1,11 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
-import recommendedSchoolsReducer from "./recommendedSchoolsSlice";
+import demoSchoolsReducer from "./demoSchoolsSlice";
 import cartReducer from "./cartSlice";
 import progressReducer from "@/store/dashboard/progressSlice"
 
 export const store = configureStore({
     reducer: {
-        recommendedSchools: recommendedSchoolsReducer,
+        demoSchools: demoSchoolsReducer,
         cart: cartReducer,
         progress: progressReducer,
     },

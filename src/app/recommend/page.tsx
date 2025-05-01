@@ -11,13 +11,14 @@ const Wrapper = styled.div`
   justify-content: center; 
   align-items: center;
   gap: 1.5rem;
-  margin: 0 auto;
-  width: 30rem;
-  max-width: 600px;
-  padding: 0 1rem;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  width: 100%;
 `;
 
 const RecommendWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   width: 100%;
 `;
 
@@ -28,7 +29,7 @@ const GoToCartWrapper = styled.div`
   align-items: center;
 `;
 
-const AddButton = styled.button`
+const GotoCartButton = styled.button`
   background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.white};
   font-weight: 600;
@@ -51,7 +52,7 @@ export default function RecommendPage() {
         <RecommendedSchoolList/>
       </RecommendWrapper>
       <GoToCartWrapper>
-          <AddButton onClick={() => router.push("/cart")}>Go to Backpack</AddButton>
+          <GotoCartButton onClick={() => router.push("/cart")}>Go to Backpack</GotoCartButton>
       </GoToCartWrapper>
     </Wrapper>
   );

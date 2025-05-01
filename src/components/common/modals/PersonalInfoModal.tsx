@@ -8,6 +8,7 @@ import CourseCreditSection from "@/components/common/modals/sections/CourseCredi
 import ResidencySection from "@/components/common/modals/sections/ResidencySection";
 import ScoreSection from "@/components/common/modals/sections/ScoreSection";
 import { isValidGPA, isValidSAT, isValidACT, isValidTOEFL } from "@/utils/scoreValidator";
+import { uploadPersonalInfo } from "@/app/api/auth/uploadPersonalInfo";
 
 const Title = styled.h2`
   font-family: var(--font-fredoka);
@@ -73,7 +74,6 @@ interface PersonalInfoFlowModalProps {
   onNext: () => void;
   title: string;
   description: string;
-  onClose: () => void;
   onUpload?: (
     data: {
       highschoolCompletion: boolean;
@@ -83,8 +83,9 @@ interface PersonalInfoFlowModalProps {
         schoolNames?: string[];
       };
       residency: {
-        status: "US" | "Non-US";
+        status: "Domestic" | "International";
         country?: string;
+        state?: string;
       };
       gpa: number;
       testType: "SAT" | "ACT";
@@ -95,7 +96,7 @@ interface PersonalInfoFlowModalProps {
   ) => void;
 }
 
-const PersonalInfoFlowModal = ({ onClose, onUpload, onNext }: PersonalInfoFlowModalProps) => {
+const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps) => {
   const [highschoolCompletion, setHighschoolCompletion] = useState<boolean | null>(null);
   const [volunteer, setVolunteer] = useState("");
   const [courseCredits, setCourseCredits] = useState({
@@ -109,7 +110,7 @@ const PersonalInfoFlowModal = ({ onClose, onUpload, onNext }: PersonalInfoFlowMo
   }); 
   const [hasAlumniRelation, setHasAlumniRelation] = useState(false);
   const [alumniSchool, setAlumniSchool] = useState<string[]>([]);
-  const [residencyStatus, setResidencyStatus] = useState<"US" | "Non-US" | "">("");
+  const [residencyStatus, setResidencyStatus] = useState<"Domestic" | "International" | "">("");
   const [residencyState, setResidencyState] = useState("");
   const [residencyCountry, setResidencyCountry] = useState("");
   const [gpa, setGpa] = useState("");
@@ -117,7 +118,7 @@ const PersonalInfoFlowModal = ({ onClose, onUpload, onNext }: PersonalInfoFlowMo
   const [typeScore, setTypeScore] = useState("");
   const [toefl, setToefl] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const v = parseInt(volunteer);
     const g = parseFloat(gpa);
     const s = parseInt(typeScore);
@@ -143,8 +144,7 @@ const PersonalInfoFlowModal = ({ onClose, onUpload, onNext }: PersonalInfoFlowMo
       alert("TOEFL score must be between 0 and 120");
       return;
     }
-
-    onUpload?.({
+    const inputData = {
       highschoolCompletion,
       volunteer: v,
       alumniRelation: {
@@ -153,13 +153,13 @@ const PersonalInfoFlowModal = ({ onClose, onUpload, onNext }: PersonalInfoFlowMo
       },
       residency: {
         status: residencyStatus,
-        country: residencyStatus === "Non-US" ? residencyCountry : undefined,
+        country: residencyStatus === "International" ? residencyCountry : "",
+        state: residencyStatus === "Domestic" ? residencyState : "",
       },
       gpa: g,
       testType,
       typeScore: s,
       toefl: t,
-
       coursework: {
         english: courseCredits.english,
         math: courseCredits.math,
@@ -169,16 +169,21 @@ const PersonalInfoFlowModal = ({ onClose, onUpload, onNext }: PersonalInfoFlowMo
         social: courseCredits.social,
         arts: courseCredits.arts,
       },
-    });
+    };
 
-    onClose();
-    onNext();
+    try {
+      const result = await uploadPersonalInfo(inputData);
+      console.log("Upload successful:", result);
+      onNext();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to upload personal info. Please try again.");
+    }
   };
 
   return (
-    <Backdrop onClick={(e) => e.target === e.currentTarget && onClose()}>
+    <Backdrop onClick={(e) => e.target === e.currentTarget}>
       <ModalBox onClick={(e) => e.stopPropagation()}>
-        <Close onClick={onClose}>x</Close>
         <Title>Personal Info & Scores</Title>
 
         <BasicInfoSection {...{ highschoolCompletion, setHighschoolCompletion, volunteer, setVolunteer}} />
@@ -190,7 +195,7 @@ const PersonalInfoFlowModal = ({ onClose, onUpload, onNext }: PersonalInfoFlowMo
         <AlumniSection
           hasAlumniRelation={hasAlumniRelation}
           setHasAlumniRelation={setHasAlumniRelation}
-          alumniSchool={alumniSchool} // ✅ string[] 타입
+          alumniSchool={alumniSchool}
           setAlumniSchool={setAlumniSchool}
         />
         <ScoreSection {...{ gpa, setGpa, testType, setTestType, typeScore, setTypeScore, toefl, setToefl }} />
