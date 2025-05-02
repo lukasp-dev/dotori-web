@@ -36,8 +36,8 @@ const OptionButton = styled.button<{ selected: boolean }>`
 `;
 
 interface ResidencySectionProps {
-  residencyStatus: "US" | "Non-US" | "";
-  setResidencyStatus: (s: "US" | "Non-US") => void;
+  residencyStatus: "Domestic" | "International" | "";
+  setResidencyStatus: (s: "Domestic" | "International") => void;
   residencyCountry: string;
   setResidencyState: (s: string) => void;
   setResidencyCountry: (c: string) => void;
@@ -55,13 +55,13 @@ const ResidencySection = ({
     <>
       <Label>Residency</Label>
       <ButtonGroup>
-        <OptionButton selected={residencyStatus === "US"} onClick={() => setResidencyStatus("US")}>US</OptionButton>
-        <OptionButton selected={residencyStatus === "Non-US"} onClick={() => setResidencyStatus("Non-US")}>Non-US</OptionButton>
+        <OptionButton selected={residencyStatus === "Domestic"} onClick={() => setResidencyStatus("Domestic")}>US</OptionButton>
+        <OptionButton selected={residencyStatus === "International"} onClick={() => setResidencyStatus("International")}>Non-US</OptionButton>
       </ButtonGroup>
-      {residencyStatus === "US" && (
+      {residencyStatus === "Domestic" && (
         <StateSelect onSelect={setResidencyState} />
       )}
-      {residencyStatus === "Non-US" && (
+      {residencyStatus === "International" && (
         <div style={{ marginBottom: "1rem" }}>
           <Select
             options={countryOptions}

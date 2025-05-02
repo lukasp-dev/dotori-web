@@ -20,13 +20,21 @@ const Title = styled.h2`
   color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
+const ListWrapper = styled.div`
+  width: 100%;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+`;
+
 const CartList = () => {
     const dispatch: AppDispatch = useDispatch();
     const items = useSelector((state: RootState) => state.cart.items);
-    const total = items.reduce((sum, item) => sum + item.price, 0);
 
     return (
-        <div>
+        <ListWrapper>
             <TitleRow>
                 <Image 
                     src={images["dotori-backpack"]}
@@ -42,10 +50,9 @@ const CartList = () => {
                     key={item.id}
                     id={item.id}
                     name={item.name}
-                    price={item.price}
                 />
             ))}
-        </div>
+        </ListWrapper>
     );
 }
 export default CartList;

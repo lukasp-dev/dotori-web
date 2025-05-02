@@ -12,7 +12,6 @@ const CardWrapper = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
-  }
 `;
 
 const TitleRow = styled.div`
@@ -25,77 +24,35 @@ const Title = styled.h1`
   font-weight: 600;
   color: ${({ theme }) => theme.colors.textPrimary};
 `;
+
+const EmptyMessage = styled.p`
+  font-size: 1rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
 const Dashboard = () => {
   const schools = useSelector((state: RootState) => state.progress);
-
-  const fallback = [
-    {
-      id: 1,
-      name: "Georgia Tech",
-      steps: {
-        ResumeOutline: true,
-        FirstDraft: true,
-        AiFeedback: false,
-        RequestedHumanize: false,
-        Humanized: false,
-        Submitted: false,
-      },
-    },
-    {
-      id: 2,
-      name: "NYU",
-      steps: {
-        ResumeOutline: true,
-        FirstDraft: true,
-        AiFeedback: true,
-        RequestedHumanize: true,
-        Humanized: false,
-        Submitted: false,
-      },
-    },
-    {
-      id: 3,
-      name: "U Georgia",
-      steps: {
-        ResumeOutline: true,
-        FirstDraft: false,
-        AiFeedback: false,
-        RequestedHumanize: false,
-        Humanized: false,
-        Submitted: false,
-      },
-    },
-    {
-      id: 4,
-      name: "UMN Twin Cities",
-      steps: {
-        ResumeOutline: true,
-        FirstDraft: true,
-        AiFeedback: true,
-        RequestedHumanize: true,
-        Humanized: true,
-        Submitted: true,
-      },
-    },
-  ];
-
-  const dataToShow = schools.length > 0 ? schools : fallback;
 
   return (
     <CardWrapper>
       <TitleRow>
         <Image 
           src={images["tori-face"]}
-          alt = "tori"
+          alt="tori"
           width={95}
           height={90}
           priority
         />
         <Title>Dashboard</Title>
       </TitleRow>
-      { dataToShow.map((school) => (
-        <DashboardCard key={school.id} school={school} />
-      ))}
+
+      {schools.length > 0 ? (
+        schools.map((school) => (
+          <DashboardCard key={school.id} school={school} />
+        ))
+      ) : (
+        <EmptyMessage>No schools to display yet.</EmptyMessage>
+      )}
     </CardWrapper>
   );
 };

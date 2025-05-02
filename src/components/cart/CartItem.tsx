@@ -5,21 +5,21 @@ import { removeFromCart } from "@/store/cartSlice";
 interface Props {
   id: number;
   name: string;
-  price: number;
 }
 
 const CartItemWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 1rem 1.5rem;
-  margin: 0 auto 1rem auto;   
-  background-color: white;
+  margin: 0 auto 1rem auto;
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  max-width: 600px;
-  width: 100%;
+  width: 90%;
+  max-width: 40rem;
   box-sizing: border-box;
+  padding: 1rem 1.5rem;
+  justify-content: space-between;
 `;
 
 const Info = styled.div`
@@ -31,11 +31,6 @@ const SchoolName = styled.h2`
   margin: 0;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.textPrimary};
-`;
-
-const Price = styled.p`
-  margin: 0.25rem 0 0;
-  color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const RemoveButton = styled.button`
@@ -53,7 +48,7 @@ const RemoveButton = styled.button`
   }
 `;
 
-const CartItem = ({ id, name, price }: Props) => {
+const CartItem = ({ id, name }: Props) => {
   const dispatch = useDispatch();
 
   const handleRemove = () => {
@@ -63,7 +58,6 @@ const CartItem = ({ id, name, price }: Props) => {
     <CartItemWrapper>
       <Info>
         <SchoolName>{name}</SchoolName>
-        <Price>${price}</Price>
       </Info>
       <RemoveButton onClick={handleRemove}>Delete</RemoveButton>
     </CartItemWrapper>
