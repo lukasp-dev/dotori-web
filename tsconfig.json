@@ -28,7 +28,10 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "styled-components.d.ts"
+    "styled-components.d.ts", 
+    "src/lib/auth.ts", 
+    "src/lib/googleAuthts",
+    "types"  
   ],
   "exclude": ["node_modules"]
 }

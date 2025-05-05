@@ -1,20 +1,34 @@
-import styled from "styled-components";
+"use client";
 
-export const GoogleButton = styled.button`
+import styled from "styled-components";
+import { ButtonHTMLAttributes } from "react";
+
+const StyledButton = styled.button`
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid ${(props) => props.theme.colors.border};
-  background-color: ${(props) => props.theme.colors.white};
-  color: ${(props) => props.theme.colors.textPrimary};
+  padding: 12px 16px;
+  border: none;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: #f7f7f7;
+    background-color: ${({ theme }) => theme.colors.primary || "#2563eb"};
+  }
+
+  &:disabled {
+    background-color: #d1d5db;
+    cursor: not-allowed;
   }
 `;
+
+type PrimaryButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  children: React.ReactNode;
+};
+
+export default function Button({ children, ...props }: PrimaryButtonProps) {
+  return <StyledButton {...props}>{children}</StyledButton>;
+}

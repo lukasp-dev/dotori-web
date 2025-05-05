@@ -7,6 +7,8 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import styled from "styled-components";
 import images from "@/constants/images.json";
 import Hamburger from "@/components/Hamburger"; // hamburger import
+import { useAuth } from "@/hooks/useAuth";
+import { clearAuth } from "@/lib/auth/tokenStorage";
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -87,6 +89,7 @@ const SignUpButton = styled(Button)`
 const Header = () => {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
+  const {isLoggedIn} = useAuth();
 
   return (
     <HeaderWrapper>
@@ -108,10 +111,12 @@ const Header = () => {
         <NavLink href="/pricing">pricing</NavLink>
         <NavLink href="/how-to-dotori">how to dotori</NavLink>
 
-        {session ? (
+        {isLoggedIn ? (
           <>
-            <span>{session.user?.name}</span>
-            <LoginButton onClick={() => signOut()}>Log out</LoginButton>
+            <LoginButton onClick={() => {
+              clearAuth(); 
+              window.location.href = "/"; 
+            }}>Log out</LoginButton>
           </>
         ) : (
           <SignUpButton as={Link} href="/signup">

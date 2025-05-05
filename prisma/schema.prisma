@@ -14,15 +14,21 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(cuid())
-  email         String   @unique
-  password      String?
-  firstname     String?
-  lastname      String?
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id             String   @id @default(uuid())
+  email          String   @unique
+  firstname      String?  @map("firstname")
+  lastname       String?  @map("lastname")
+  password       String?  @map("password")
+  role           String   @default("USER") @map("role")
+  emailVerified  DateTime? @map("email_verified")
+  image          String?  @map("image")
+  name           String?  @map("name")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  accounts       Account[]
+  sessions       Session[]
+
+  @@map("users")
 }
 
 

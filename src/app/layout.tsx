@@ -4,6 +4,7 @@ import { Providers } from "./providers";
 import ConditionalHeader from "@/components/ConditionalHeader";
 import "./globals.css";
 import { StyledComponentsRegistry } from "@/lib/styled-components-registry";
+import AuthBridge from "@/components/auth/AuthBridge";
 
 const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body className={`${notoSansKr.variable} ${baloo2.variable} antialiased`}>
         <StyledComponentsRegistry suppressHydrationWarning>
           <Providers>
+            <AuthBridge/>
             <ConditionalHeader />
             {children}
           </Providers>

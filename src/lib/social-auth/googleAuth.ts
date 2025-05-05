@@ -6,6 +6,7 @@ import type { AdapterUser } from "next-auth/adapters";
 import type { Session } from "next-auth";
 import type { SessionStrategy } from "next-auth";
 import { User } from "@prisma/client";
+import type { User as NextUser } from "next-auth";
 import bcrypt from "bcrypt";
 
 // Extend the Session type to include id
@@ -69,6 +70,9 @@ export const authConfig = {
     strategy: "database" as SessionStrategy,
   },
   callbacks: {
+    async signIn({ user }: { user: NextUser }) {
+      return true; // allow login
+    },
     async session({ session, user }: { session: Session; user: AdapterUser }) {
       if (session.user) {
         session.user.id = user.id;
