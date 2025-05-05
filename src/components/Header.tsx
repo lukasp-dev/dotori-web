@@ -3,12 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import styled from "styled-components";
 import images from "@/constants/images.json";
 import Hamburger from "@/components/Hamburger"; // hamburger import
 import { useAuth } from "@/hooks/useAuth";
-import { clearAuth } from "@/lib/auth/tokenStorage";
+import { useRouter } from "next/navigation";
+import { logout } from "@/lib/auth/logout";
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -89,6 +90,7 @@ const SignUpButton = styled(Button)`
 const Header = () => {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
   const {isLoggedIn} = useAuth();
 
   return (
@@ -113,10 +115,15 @@ const Header = () => {
 
         {isLoggedIn ? (
           <>
-            <LoginButton onClick={() => {
-              clearAuth(); 
-              window.location.href = "/"; 
-            }}>Log out</LoginButton>
+            <LoginButton
+              onClick={async () => {
+                await logout();
+                signOut({ redirect: false }); // NextAuth session clear
+                router.push("/");
+              }}
+            >
+              Log out
+            </LoginButton>
           </>
         ) : (
           <SignUpButton as={Link} href="/signup">
