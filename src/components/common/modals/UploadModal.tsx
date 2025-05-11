@@ -100,7 +100,12 @@ const UploadModal = ({
       return;
     }
     try {
-      const url = await uploadResume(selectedFile); // ✅ 실제 API 호출
+      const userId = localStorage.getItem("userId");
+      if (!userId) {
+        alert("❌ User ID not found. Please log in again.");
+        return;
+      }
+      const url = await uploadResume(selectedFile, userId); // ✅ 실제 API 호출
       console.log("✅ Uploaded to:", url);
   
       // 선택적으로 부모 컴포넌트에 전달
