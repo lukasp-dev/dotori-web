@@ -100,7 +100,15 @@ const UploadModal = ({
       return;
     }
     try {
-      const userId = localStorage.getItem("userId");
+      let userId = localStorage.getItem("userId");
+      if(!userId) {
+        const userInfo = localStorage.getItem("user");
+        if (userInfo) {
+          const userInfoJson = JSON.parse(userInfo);
+          userId = userInfoJson.id;
+        }
+      }
+    
       if (!userId) {
         alert("❌ User ID not found. Please log in again.");
         return;

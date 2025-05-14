@@ -1,5 +1,5 @@
 export const ACCESS_TOKEN_KEY = "accessToken";
-export const USER_INFO_KEY = "userInfo";
+export const USER_INFO_KEY = "user";
 
 export interface StoredUser {
   id: string;
