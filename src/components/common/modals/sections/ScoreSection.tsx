@@ -49,8 +49,6 @@ interface ScoreSectionProps {
   setTestType: (v: "SAT" | "ACT") => void;
   typeScore: string;
   setTypeScore: (v: string) => void;
-  toefl: string;
-  setToefl: (v: string) => void;
 }
 
 const ScoreSection = ({
@@ -60,8 +58,6 @@ const ScoreSection = ({
   setTestType,
   typeScore,
   setTypeScore,
-  toefl,
-  setToefl,
 }: ScoreSectionProps) => {
   return (
     <>
@@ -86,14 +82,6 @@ const ScoreSection = ({
         placeholder={testType === "SAT" ? "e.g. 1250" : "e.g. 34"}
         value={typeScore}
         onChange={(e) => setTypeScore(e.target.value)}
-      />
-
-      <Label>TOEFL Score</Label>
-      <Input
-        type="number"
-        placeholder="e.g. 110"
-        value={toefl}
-        onChange={(e) => setToefl(e.target.value)}
       />
     </>
   );

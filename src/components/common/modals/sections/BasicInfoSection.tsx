@@ -45,6 +45,8 @@ const OptionButton = styled.button<{ selected: boolean }>`
 interface BasicInfoSectionProps {
   highschoolCompletion: boolean | null;
   setHighschoolCompletion: (v: boolean) => void;
+  firstGeneration: boolean | null;
+  setFirstGeneration: (v: boolean) => void;
   volunteer: string;
   setVolunteer: (v: string) => void;
 }
@@ -52,6 +54,8 @@ interface BasicInfoSectionProps {
 const BasicInfoSection = ({
   highschoolCompletion,
   setHighschoolCompletion,
+  firstGeneration,
+  setFirstGeneration,
   volunteer,
   setVolunteer,
 }: BasicInfoSectionProps) => {
@@ -61,6 +65,12 @@ const BasicInfoSection = ({
       <ButtonGroup>
         <OptionButton selected={highschoolCompletion === true} onClick={() => setHighschoolCompletion(true)}>Yes</OptionButton>
         <OptionButton selected={highschoolCompletion === false} onClick={() => setHighschoolCompletion(false)}>No</OptionButton>
+      </ButtonGroup>
+
+      <Label>First Generation</Label>
+      <ButtonGroup>
+        <OptionButton selected={firstGeneration === true} onClick={() => setFirstGeneration(true)}>Yes</OptionButton>
+        <OptionButton selected={firstGeneration === false} onClick={() => setFirstGeneration(false)}>No</OptionButton>
       </ButtonGroup>
 
       <Label>Volunteering Hours</Label>

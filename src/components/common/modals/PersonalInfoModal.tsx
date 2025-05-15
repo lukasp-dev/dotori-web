@@ -7,6 +7,7 @@ import BasicInfoSection from "@/components/common/modals/sections/BasicInfoSecti
 import CourseCreditSection from "@/components/common/modals/sections/CourseCreditSection"
 import ResidencySection from "@/components/common/modals/sections/ResidencySection";
 import ScoreSection from "@/components/common/modals/sections/ScoreSection";
+import EnglishTestSection from "@/components/common/modals/sections/EnglishTestSection";
 import { isValidGPA, isValidSAT, isValidACT, isValidTOEFL } from "@/utils/scoreValidator";
 import { uploadPersonalInfo } from "@/app/api/auth/uploadPersonalInfo";
 
@@ -77,6 +78,7 @@ interface PersonalInfoFlowModalProps {
   onUpload?: (
     data: {
       highschoolCompletion: boolean;
+      firstGeneration: boolean;
       volunteer: number;
       alumniRelation: {
         hasRelation: boolean;
@@ -108,7 +110,8 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
     social: 0,
     arts: 0,
   }); 
-  const [hasAlumniRelation, setHasAlumniRelation] = useState(false);
+  const [hasAlumniRelation, setHasAlumniRelation] = useState<boolean | null>(null);
+  const [firstGeneration, setFirstGeneration]= useState<boolean | null>(null);
   const [alumniSchool, setAlumniSchool] = useState<string[]>([]);
   const [residencyStatus, setResidencyStatus] = useState<"Domestic" | "International" | "">("");
   const [residencyState, setResidencyState] = useState("");
@@ -116,16 +119,21 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
   const [gpa, setGpa] = useState("");
   const [testType, setTestType] = useState<"SAT" | "ACT">("SAT");
   const [typeScore, setTypeScore] = useState("");
-  const [toefl, setToefl] = useState("");
+  const [englishTestType, setEnglishTestType] = useState<"TOEFL" | "IELTS" | "Duolingo">("TOEFL");
+  const [englishTestScore, setEnglishTestScore] = useState("");
 
   const handleSubmit = async () => {
     const v = parseInt(volunteer);
     const g = parseFloat(gpa);
     const s = parseInt(typeScore);
-    const t = parseInt(toefl);
-
-    if (highschoolCompletion === null || !residencyStatus || isNaN(v) ||  isNaN(g) || isNaN(s) || isNaN(t)) {
-      alert("❗ Please complete all fields");
+    const t = parseInt(englishTestScore);
+    if (
+      highschoolCompletion === null ||
+      firstGeneration === null ||
+      !residencyStatus ||
+      isNaN(v) || isNaN(g) || isNaN(s) || isNaN(t)
+    ) {
+      alert("❗ Please complete all required fields.");
       return;
     }
     if (!isValidGPA(g)) {
@@ -140,12 +148,67 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
       alert("ACT score must be between 1 and 36");
       return;
     }
-    if (!isValidTOEFL(t)) {
-      alert("TOEFL score must be between 0 and 120");
+    const isInternational = residencyStatus === "International";
+    const englishScore = parseInt(englishTestScore);
+    
+    if (
+      highschoolCompletion === null ||
+      firstGeneration === null ||
+      !residencyStatus ||
+      isNaN(v) || isNaN(g) || isNaN(s)
+    ) {
+      alert("❗ Please complete all required fields.");
       return;
+    }
+    
+    if (!isValidGPA(g)) {
+      alert("GPA must be between 0.0 and 4.0");
+      return;
+    }
+    
+    if (testType === "SAT" && !isValidSAT(s)) {
+      alert("SAT score must be between 400 and 1600");
+      return;
+    }
+    
+    if (testType === "ACT" && !isValidACT(s)) {
+      alert("ACT score must be between 1 and 36");
+      return;
+    }
+    
+    if (isInternational) {
+      if (isNaN(englishScore)) {
+        alert("Please enter your English proficiency test score.");
+        return;
+      }
+    
+      switch (englishTestType) {
+        case "TOEFL":
+          if (englishScore < 0 || englishScore > 120) {
+            alert("TOEFL score must be between 0 and 120");
+            return;
+          }
+          break;
+        case "IELTS":
+          if (englishScore < 0 || englishScore > 9) {
+            alert("IELTS score must be between 0 and 9");
+            return;
+          }
+          break;
+        case "Duolingo":
+          if (englishScore < 0 || englishScore > 160) {
+            alert("Duolingo score must be between 0 and 160");
+            return;
+          }
+          break;
+        default:
+          alert("Please select a valid English proficiency test.");
+          return;
+      }
     }
     const inputData = {
       highschoolCompletion,
+      firstGeneration,
       volunteer: v,
       alumniRelation: {
         hasRelation: hasAlumniRelation,
@@ -160,6 +223,8 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
       testType,
       typeScore: s,
       toefl: t,
+      englishTestType,
+      englishTestScore: parseInt(englishTestScore),
       coursework: {
         english: courseCredits.english,
         math: courseCredits.math,
@@ -186,7 +251,7 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
       <ModalBox onClick={(e) => e.stopPropagation()}>
         <Title>Personal Info & Scores</Title>
 
-        <BasicInfoSection {...{ highschoolCompletion, setHighschoolCompletion, volunteer, setVolunteer}} />
+        <BasicInfoSection {...{ highschoolCompletion, setHighschoolCompletion, firstGeneration, setFirstGeneration, volunteer, setVolunteer}} />
         <CourseCreditSection
           courseCredits={courseCredits}
           setCourseCredits={setCourseCredits}
@@ -198,8 +263,8 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
           alumniSchool={alumniSchool}
           setAlumniSchool={setAlumniSchool}
         />
-        <ScoreSection {...{ gpa, setGpa, testType, setTestType, typeScore, setTypeScore, toefl, setToefl }} />
-
+        <ScoreSection {...{ gpa, setGpa, testType, setTestType, typeScore, setTypeScore }} />
+        <EnglishTestSection {...{ testType: englishTestType, setTestType: setEnglishTestType, typeScore: englishTestScore, setTypeScore: setEnglishTestScore, residencyStatus }} />
         <UploadButton onClick={handleSubmit}>Submit</UploadButton>
       </ModalBox>
     </Backdrop>
