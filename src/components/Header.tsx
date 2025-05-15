@@ -78,6 +78,12 @@ const LoginButton = styled(Button)`
   border: 1px solid ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.primary};
   background-color: ${({ theme }) => theme.colors.white};
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.textPrimary};
+    color: ${({ theme }) => theme.colors.textPrimary};
+    background-color: ${({ theme }) => theme.colors.white};
+    cursor: pointer;
+  }
 `;
 
 const SignUpButton = styled(Button)`
@@ -85,6 +91,9 @@ const SignUpButton = styled(Button)`
   color: ${(props) => props.theme.colors.white};
   border: none;
   text-decoration: none;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.textPrimary};
+  }
 `;
 
 const Header = () => {

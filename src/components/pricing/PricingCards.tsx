@@ -39,7 +39,7 @@ const Price = styled.h3`
 const Description = styled.div`
   font-size: 1rem;
   font-weight: 400;
-  color: ${({theme}) => theme.colors.textSecondary};
+  color: ${({theme}) => theme.colors.textPrimary};
   line-height: 1.5;
 `
 type Props = {

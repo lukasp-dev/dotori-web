@@ -1,16 +1,15 @@
-// src/styles/theme.ts
+import "styled-components";
 
-const theme = {
-  colors: {
-    border: "#e5e7eb",
-    textPrimary: "#59421a",
-    textHover: "#b78657",
-    primary: "#b06b47",
-    background: "#dfefc3",
-    white: "#ffffff",
-  },
-} as const;
-
-export type ThemeType = typeof theme;
-
-export default theme;
+declare module "styled-components" {
+  export interface DefaultTheme {
+    mode: "light" | "dark";
+    colors: {
+      border: string;
+      textPrimary: string;
+      textSecondary: string;
+      textHover: string;
+      primary: string;
+      white: string;
+    };
+  }
+}
