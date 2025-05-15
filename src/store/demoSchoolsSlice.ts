@@ -3,6 +3,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchDemoSchools = createAsyncThunk(
   "allSchools/fetch",
   async () => {
+    console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/schools`);
     if (!response.ok) {
       throw new Error("Failed to fetch all schools");

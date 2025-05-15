@@ -1,4 +1,5 @@
-"use client";
+import { getAccessToken } from "@/lib/auth/tokenStorage";
+import axios from 'axios';
 
 export interface InputData {
   highschoolCompletion: boolean;
@@ -28,6 +29,11 @@ export interface InputData {
 }
 
 export async function uploadPersonalInfo(data: InputData) {
+  const accessToken = getAccessToken();
+  if (!accessToken) {
+    throw new Error("From uploadPersonalInfo: No access token found");
+  }
+
   try {
     const payload = {
       high_school_completion: data.highschoolCompletion ? 1 : 0,
@@ -44,20 +50,18 @@ export async function uploadPersonalInfo(data: InputData) {
       volunteering_hours: data.volunteer,
     };
 
-    const res = await fetch("http://localhost:8080/api/uploadPersonalInfo", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/uploadPersonalInfo`,
+      payload,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        }
+      }
+    );
 
-    if (!res.ok) {
-      throw new Error("Failed to upload personal info");
-    }
-
-    const result = await res.json();
-    return result;
+    return response.data;
   } catch (error) {
     console.error(error);
     throw error;
