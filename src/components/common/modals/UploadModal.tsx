@@ -101,22 +101,20 @@ const UploadModal = ({
     }
     try {
       let userId = localStorage.getItem("userId");
-      if(!userId) {
+      if (!userId) {
         const userInfo = localStorage.getItem("user");
         if (userInfo) {
           const userInfoJson = JSON.parse(userInfo);
           userId = userInfoJson.id;
+        } else {
+          alert("❌");
+          return;
         }
       }
-    
-      if (!userId) {
-        alert("❌ User ID not found. Please log in again.");
-        return;
-      }
-      const url = await uploadResume(selectedFile, userId); // ✅ 실제 API 호출
+      if (!userId) return;
+      const url = await uploadResume(selectedFile, userId);
       console.log("✅ Uploaded to:", url);
   
-      // 선택적으로 부모 컴포넌트에 전달
       onUpload?.(selectedFile);
   
       onClose();
