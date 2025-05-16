@@ -7,9 +7,10 @@ import { useSession, signOut } from "next-auth/react";
 import styled from "styled-components";
 import images from "@/constants/images.json";
 import Hamburger from "@/components/Hamburger"; // hamburger import
+import AvatarButton from "@/components/userProfile/AvatarButton";
+import ProfileDrawer from "@/components/userProfile/ProfileDrawer";
 import { useAuth } from "@/hooks/useAuth";
-import { useRouter } from "next/navigation";
-import { logout } from "@/lib/auth/logout";
+import { getInitials } from "@/lib/getInitials";
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -19,7 +20,6 @@ const HeaderWrapper = styled.header`
   z-index: 50;
   background-color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -74,18 +74,6 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const LoginButton = styled(Button)`
-  border: 1px solid ${(props) => props.theme.colors.primary};
-  color: ${(props) => props.theme.colors.primary};
-  background-color: ${({ theme }) => theme.colors.white};
-  &:hover {
-    border-color: ${({ theme }) => theme.colors.textPrimary};
-    color: ${({ theme }) => theme.colors.textPrimary};
-    background-color: ${({ theme }) => theme.colors.white};
-    cursor: pointer;
-  }
-`;
-
 const SignUpButton = styled(Button)`
   background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.white};
@@ -99,8 +87,9 @@ const SignUpButton = styled(Button)`
 const Header = () => {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
-  const router = useRouter();
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const { isLoggedIn } = useAuth();
+  const initials = getInitials(session?.user?.name || session?.user?.email);
 
   return (
     <HeaderWrapper>
@@ -131,18 +120,8 @@ const Header = () => {
 
         {isLoggedIn ? (
           <>
-            <LoginButton
-              onClick={async () => {
-                await signOut({
-                  redirect: false,
-                  callbackUrl: "/",
-                });
-                await logout();
-                window.location.href = "/";
-              }}
-            >
-              Log out
-            </LoginButton>
+            <AvatarButton initials={initials} onClick={() => setDrawerOpen(true)} />
+            <ProfileDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
           </>
         ) : (
           <SignUpButton as={Link} href="/signup">
