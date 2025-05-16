@@ -2,13 +2,14 @@
 
 import styled from "styled-components";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import AlumniSection from "@/components/common/modals/sections/AlumniSection";
 import BasicInfoSection from "@/components/common/modals/sections/BasicInfoSection";
 import CourseCreditSection from "@/components/common/modals/sections/CourseCreditSection"
 import ResidencySection from "@/components/common/modals/sections/ResidencySection";
 import ScoreSection from "@/components/common/modals/sections/ScoreSection";
 import EnglishTestSection from "@/components/common/modals/sections/EnglishTestSection";
-import { isValidGPA, isValidSAT, isValidACT, isValidTOEFL } from "@/utils/scoreValidator";
+import { isValidGPA, isValidSAT, isValidACT } from "@/utils/scoreValidator";
 import { uploadPersonalInfo } from "@/app/api/auth/uploadPersonalInfo";
 
 const Title = styled.h2`
@@ -99,6 +100,7 @@ interface PersonalInfoFlowModalProps {
 }
 
 const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps) => {
+  const { data: session } = useSession();
   const [highschoolCompletion, setHighschoolCompletion] = useState<boolean | null>(null);
   const [volunteer, setVolunteer] = useState("");
   const [courseCredits, setCourseCredits] = useState({
@@ -123,6 +125,10 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
   const [englishTestScore, setEnglishTestScore] = useState("");
 
   const handleSubmit = async () => {
+    if (!session?.user?.id) {
+      alert("Please login first");
+      return;
+    }
     const v = parseInt(volunteer);
     const g = parseFloat(gpa);
     const s = parseInt(typeScore);
@@ -207,6 +213,7 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
       }
     }
     const inputData = {
+      userId: session.user.id,
       highschoolCompletion,
       firstGeneration,
       volunteer: v,
