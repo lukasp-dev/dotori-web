@@ -11,7 +11,7 @@ import ScoreSection from "@/components/common/modals/sections/ScoreSection";
 import EnglishTestSection from "@/components/common/modals/sections/EnglishTestSection";
 import { isValidGPA, isValidSAT, isValidACT } from "@/utils/scoreValidator";
 import { uploadPersonalInfo } from "@/app/api/auth/uploadPersonalInfo";
-
+import { getUserId } from "@/lib/auth/user";
 const Title = styled.h2`
   font-family: var(--font-fredoka);
   font-weight: 600;
@@ -125,8 +125,12 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
   const [englishTestScore, setEnglishTestScore] = useState("");
 
   const handleSubmit = async () => {
-    if (!session?.user?.id) {
-      alert("Please login first");
+    let userId : string;
+    try {
+      userId = getUserId();
+    }
+    catch(err) {
+      alert("Please login first.");
       return;
     }
     const v = parseInt(volunteer);
@@ -213,7 +217,7 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
       }
     }
     const inputData = {
-      userId: session.user.id,
+      userId,
       highschoolCompletion,
       firstGeneration,
       volunteer: v,
