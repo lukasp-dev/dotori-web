@@ -2,6 +2,7 @@ import { getAccessToken } from "@/lib/auth/tokenStorage";
 import axios from 'axios';
 
 export interface InputData {
+  userId: string;
   highschoolCompletion: boolean;
   englishTestType: "TOEFL" | "IELTS" | "Duolingo";
   volunteer: number;
@@ -39,6 +40,7 @@ export async function uploadPersonalInfo(data: InputData) {
   try {
     const isInternational = data.residency.status === "International";
     const payload = {
+      userId: data.userId,
       high_school_completion: data.highschoolCompletion ? 1 : 0,
       general_college_requirement: data.coursework,
       alumni: data.alumniRelation.hasRelation ? 1 : 0,

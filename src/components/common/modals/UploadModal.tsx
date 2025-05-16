@@ -3,7 +3,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { uploadResume } from "@/app/api/auth/uploadResume";
-
+import { getUserId } from "@/lib/auth/user";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -100,7 +100,7 @@ const UploadModal = ({
       return;
     }
     try {
-      let userId = localStorage.getItem("userId");
+      let userId = getUserId();
       if (!userId) {
         const userInfo = localStorage.getItem("user");
         if (userInfo) {
