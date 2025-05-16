@@ -12,4 +12,6 @@ export const googleToSpring = async (email: string, name: string) => {
 
   setAccessToken(accessToken);
   setUserInfo(user);
+
+  window.dispatchEvent(new Event("authChange"));
 };
