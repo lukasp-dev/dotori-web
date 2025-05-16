@@ -9,7 +9,9 @@ export interface StoredUser {
 }
 
 export const getAccessToken = (): string | null => {
-  return typeof window !== "undefined" ? localStorage.getItem(ACCESS_TOKEN_KEY) : null;
+  return typeof window !== "undefined"
+    ? localStorage.getItem(ACCESS_TOKEN_KEY)
+    : null;
 };
 
 export const getUserInfo = (): StoredUser | null => {
@@ -19,16 +21,19 @@ export const getUserInfo = (): StoredUser | null => {
 };
 
 export const setAccessToken = (token: string) => {
-  if (typeof window !== "undefined") localStorage.setItem(ACCESS_TOKEN_KEY, token);
+  if (typeof window !== "undefined")
+    localStorage.setItem(ACCESS_TOKEN_KEY, token);
 };
 
 export const setUserInfo = (info: StoredUser) => {
-  if (typeof window !== "undefined") localStorage.setItem(USER_INFO_KEY, JSON.stringify(info));
+  if (typeof window !== "undefined")
+    localStorage.setItem(USER_INFO_KEY, JSON.stringify(info));
 };
 
 export const clearAuth = () => {
   if (typeof window !== "undefined") {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(USER_INFO_KEY);
+    window.location.reload();
   }
 };

@@ -100,7 +100,7 @@ const Header = () => {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
-  const {isLoggedIn} = useAuth();
+  const { isLoggedIn } = useAuth();
 
   return (
     <HeaderWrapper>
@@ -118,7 +118,14 @@ const Header = () => {
       <Hamburger open={menuOpen} onClick={() => setMenuOpen((prev) => !prev)} />
 
       <Nav $isOpen={menuOpen}>
-        <NavLink as="a" href="https://dotori-intro-website.vercel.app/" target="_blank" rel="noopener noreferrer">about</NavLink>
+        <NavLink
+          as="a"
+          href="https://dotori-intro-website.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          about
+        </NavLink>
         <NavLink href="/pricing">pricing</NavLink>
         <NavLink href="/how-to-dotori">how to dotori</NavLink>
 
@@ -126,9 +133,12 @@ const Header = () => {
           <>
             <LoginButton
               onClick={async () => {
+                await signOut({
+                  redirect: false,
+                  callbackUrl: "/",
+                });
                 await logout();
-                signOut({ redirect: false }); // NextAuth session clear
-                router.push("/");
+                window.location.href = "/";
               }}
             >
               Log out
