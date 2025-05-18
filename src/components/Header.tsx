@@ -63,7 +63,7 @@ const NavLink = styled(Link)`
   text-decoration: none;
   font-weight: 500;
   &:hover {
-    color: ${(props) => props.theme.colors.textHover};
+    color: ${(props) => props.theme.colors.primary};
   }
 `;
 

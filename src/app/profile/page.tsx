@@ -1,20 +1,26 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import styled from "styled-components";
+import { useSession } from "next-auth/react";
+import UserInfo from "@/components/userProfile/UserInfo";
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+`;
 
 export default function Profile() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
-  if (status === "loading") return <p>Loading...</p>;
-  if (!session) return <p>Not logged in</p>;
+  if (status === "loading") {
+    return (
+      <Wrapper>
+        <p>Loading...</p>
+      </Wrapper>
+    );
+  }
 
-  return (
-    <div>
-      <p>Welcome, {session.user?.name}</p>
-      <p>Email: {session.user?.email}</p>
-      <img src={session.user?.image || ""} alt="Profile" />
-
-      <button onClick={() => signOut({ callbackUrl: "/" })}>Sign out</button>
-    </div>
-  );
+  return <UserInfo />;
 }
