@@ -8,11 +8,18 @@ import AvatarButton from "@/components/userProfile/AvatarButton";
 
 const ProfileContainer = styled.div`
   max-width: 50rem;
+  width: 100%;
   margin: 8rem auto;
   padding: 2rem;
   background-color: white;
   border-radius: 1rem;
   box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    margin: 6rem 1rem;
+    padding: 1.5rem;
+    width: auto;
+  }
 `;
 
 const ProfileHeader = styled.div`
