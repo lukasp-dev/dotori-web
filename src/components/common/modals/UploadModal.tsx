@@ -94,34 +94,42 @@ const UploadModal = ({
     }
   };
 
-  const handleUpload = async() => {
+  const handleUpload = async () => {
     if (!selectedFile) {
       alert("📄 Please select the file first.");
       return;
     }
+  
     try {
-      let userId = getUserId();
-      if (!userId) {
-        const userInfo = localStorage.getItem("user");
-        if (userInfo) {
-          const userInfoJson = JSON.parse(userInfo);
-          userId = userInfoJson.id;
-        } else {
-          alert("❌");
+      let userId: string | null = null;
+  
+      const rawUser = localStorage.getItem("user") || localStorage.getItem("userInfo");
+  
+      if (rawUser) {
+        try {
+          const parsed = JSON.parse(rawUser);
+          userId = parsed.id ?? null;
+        } catch (e) {
+          alert("❌ Failed to parse user data.");
           return;
         }
       }
-      if (!userId) return;
+  
+      if (!userId) {
+        alert("❌ Upload failed: userId not found in localStorage");
+        return;
+      }
+  
       const url = await uploadResume(selectedFile, userId);
       console.log("✅ Uploaded to:", url);
   
       onUpload?.(selectedFile);
-  
       onClose();
+  
     } catch (err: any) {
       alert("❌ Upload failed: " + err.message);
     }
-  };
+  };  
 
   return (
     <Backdrop onClick={(e) => {
