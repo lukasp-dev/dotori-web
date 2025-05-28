@@ -125,42 +125,30 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
   const [englishTestScore, setEnglishTestScore] = useState("");
 
   const handleSubmit = async () => {
-    let userId : string;
-    try {
-      userId = getUserId();
+    let userId: string | null = null;
+  
+    const rawUser = localStorage.getItem("user") || localStorage.getItem("userInfo");
+    if (rawUser) {
+      try {
+        const parsed = JSON.parse(rawUser);
+        userId = parsed.id ?? null;
+      } catch (err) {
+        alert("⚠️ Failed to parse user info.");
+        return;
+      }
     }
-    catch(err) {
-      alert("Please login first.");
+  
+    if (!userId) {
+      alert("❌ Please login first.");
       return;
     }
+  
     const v = parseInt(volunteer);
     const g = parseFloat(gpa);
     const s = parseInt(typeScore);
-    const t = parseInt(englishTestScore);
-    if (
-      highschoolCompletion === null ||
-      firstGeneration === null ||
-      !residencyStatus ||
-      isNaN(v) || isNaN(g) || isNaN(s) || isNaN(t)
-    ) {
-      alert("❗ Please complete all required fields.");
-      return;
-    }
-    if (!isValidGPA(g)) {
-      alert("GPA must be between 0.0 and 4.0");
-      return;
-    }
-    if (testType === "SAT" && !isValidSAT(s)) {
-      alert("SAT score must be between 400 and 1600");
-      return;
-    }
-    if (testType === "ACT" && !isValidACT(s)) {
-      alert("ACT score must be between 1 and 36");
-      return;
-    }
+  
     const isInternational = residencyStatus === "International";
-    const englishScore = parseInt(englishTestScore);
-    
+  
     if (
       highschoolCompletion === null ||
       firstGeneration === null ||
@@ -170,43 +158,46 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
       alert("❗ Please complete all required fields.");
       return;
     }
-    
+  
     if (!isValidGPA(g)) {
       alert("GPA must be between 0.0 and 4.0");
       return;
     }
-    
+  
     if (testType === "SAT" && !isValidSAT(s)) {
       alert("SAT score must be between 400 and 1600");
       return;
     }
-    
+  
     if (testType === "ACT" && !isValidACT(s)) {
       alert("ACT score must be between 1 and 36");
       return;
     }
-    
+  
+    let t = 0;
+  
     if (isInternational) {
-      if (isNaN(englishScore)) {
+      t = parseInt(englishTestScore);
+      if (isNaN(t)) {
         alert("Please enter your English proficiency test score.");
         return;
       }
-    
+  
       switch (englishTestType) {
         case "TOEFL":
-          if (englishScore < 0 || englishScore > 120) {
+          if (t < 0 || t > 120) {
             alert("TOEFL score must be between 0 and 120");
             return;
           }
           break;
         case "IELTS":
-          if (englishScore < 0 || englishScore > 9) {
+          if (t < 0 || t > 9) {
             alert("IELTS score must be between 0 and 9");
             return;
           }
           break;
         case "Duolingo":
-          if (englishScore < 0 || englishScore > 160) {
+          if (t < 0 || t > 160) {
             alert("Duolingo score must be between 0 and 160");
             return;
           }
@@ -216,6 +207,7 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
           return;
       }
     }
+  
     const inputData = {
       userId,
       highschoolCompletion,
@@ -227,15 +219,15 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
       },
       residency: {
         status: residencyStatus,
-        country: residencyStatus === "International" ? residencyCountry : "",
-        state: residencyStatus === "Domestic" ? residencyState : "",
+        country: isInternational ? residencyCountry : "",
+        state: !isInternational ? residencyState : "",
       },
       gpa: g,
       testType,
       typeScore: s,
       toefl: t,
       englishTestType,
-      englishTestScore: parseInt(englishTestScore),
+      englishTestScore: t,
       coursework: {
         english: courseCredits.english,
         math: courseCredits.math,
@@ -246,14 +238,14 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
         arts: courseCredits.arts,
       },
     };
-
+  
     try {
       const result = await uploadPersonalInfo(inputData);
-      console.log("Upload successful:", result);
+      console.log("✅ Upload successful:", result);
       onNext();
     } catch (error) {
       console.error(error);
-      alert("Failed to upload personal info. Please try again.");
+      alert("❌ Failed to upload personal info. Please try again.");
     }
   };
 
