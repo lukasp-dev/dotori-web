@@ -29,7 +29,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" style={{ colorScheme: 'light' }}>
+      <head>
+        <meta name="color-scheme" content="light" />
+      </head>
       <body className={`${notoSansKr.variable} ${baloo2.variable} antialiased`}>
         <StyledComponentsRegistry suppressHydrationWarning>
           <Providers>
