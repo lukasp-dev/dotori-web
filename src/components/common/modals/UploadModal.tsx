@@ -101,32 +101,13 @@ const UploadModal = ({
     }
   
     try {
-      let userId: string | null = null;
-  
-      const rawUser = localStorage.getItem("user") || localStorage.getItem("userInfo");
-  
-      if (rawUser) {
-        try {
-          const parsed = JSON.parse(rawUser);
-          userId = parsed.id ?? null;
-        } catch (e) {
-          alert("❌ Failed to parse user data.");
-          return;
-        }
-      }
-  
-      if (!userId) {
-        alert("❌ Upload failed: userId not found in localStorage");
-        return;
-      }
-  
-      const url = await uploadResume(selectedFile, userId);
-      console.log("✅ Uploaded to:", url);
-  
+      console.log('UploadModal: Selected file:', selectedFile);
+      console.log('UploadModal: Calling onUpload callback');
       onUpload?.(selectedFile);
+      console.log('UploadModal: onUpload callback completed');
       onClose();
-  
     } catch (err: any) {
+      console.error('UploadModal: Error in handleUpload:', err);
       alert("❌ Upload failed: " + err.message);
     }
   };  
