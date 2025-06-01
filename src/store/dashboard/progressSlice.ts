@@ -10,8 +10,8 @@ export interface SchoolSteps {
 }
 
 export interface SchoolProgress {
-  id: number;
-  name: string;
+  userId: string;
+  school_name: string;
   steps: SchoolSteps;
 }
 
@@ -24,9 +24,9 @@ const progressSlice = createSlice({
     initProgress: (state, action: PayloadAction<SchoolProgress[]>) => {
       return action.payload;
     },
-    updateStep: (state, action: PayloadAction<{ schoolId: number; step: keyof SchoolSteps; value: boolean }>) => {
-      const { schoolId, step, value } = action.payload;
-      const school = state.find((s) => s.id === schoolId);
+    updateStep: (state, action: PayloadAction<{ school_name: string; step: keyof SchoolSteps; value: boolean }>) => {
+      const { school_name, step, value } = action.payload;
+      const school = state.find((s) => s.school_name === school_name);
       if (school) {
         school.steps[step] = value;
       }

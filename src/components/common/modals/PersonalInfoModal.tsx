@@ -57,7 +57,7 @@ const Close = styled.button`
 `;
 
 const UploadButton = styled.button`
-  background-color: ${(props) => props.theme.colors.textSecondary};
+  background-color: ${(props) => props.theme.colors.textPrimary};
   color: ${(props) => props.theme.colors.white};
   font-weight: 600;
   padding: 0.5rem 1.25rem;
