@@ -3,8 +3,11 @@ import { useDispatch } from "react-redux";
 import { removeFromCart } from "@/store/cartSlice";
 
 interface Props {
-  id: number;
-  name: string;
+  school: {
+    userId: string;
+    school_name: string;
+    score: number;
+  };
 }
 
 const CartItemWrapper = styled.div`
@@ -48,16 +51,16 @@ const RemoveButton = styled.button`
   }
 `;
 
-const CartItem = ({ id, name }: Props) => {
+const CartItem = ({ school }: Props) => {
   const dispatch = useDispatch();
 
   const handleRemove = () => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart(school.school_name));
   };
   return (
     <CartItemWrapper>
       <Info>
-        <SchoolName>{name}</SchoolName>
+        <SchoolName>{school.school_name}</SchoolName>
       </Info>
       <RemoveButton onClick={handleRemove}>Delete</RemoveButton>
     </CartItemWrapper>

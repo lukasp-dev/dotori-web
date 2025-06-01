@@ -18,7 +18,6 @@ const Card = styled.div`
   height: 6rem;
   max-width: 30rem;
   width: 90vw;
-
   &:hover {
     background-color: #f5f5dc;
   }
@@ -72,7 +71,7 @@ const DashboardCard = ({ school }: Props) => {
 
   return (
     <Card>
-      <Title>{school.name}</Title>
+      <Title>{school.school_name}</Title>
       <BarBackground>
         <Bar percent={percent} />
       </BarBackground>

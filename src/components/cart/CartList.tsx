@@ -47,9 +47,8 @@ const CartList = () => {
             </TitleRow>
             {items.map((item) => (
                 <CartItem
-                    key={item.id}
-                    id={item.id}
-                    name={item.name}
+                    key={item.school_name}
+                    school={item}
                 />
             ))}
         </ListWrapper>

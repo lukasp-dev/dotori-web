@@ -52,7 +52,7 @@ const AddButton = styled.button.withConfig({
   shouldForwardProp: (prop) => prop !== "added"
 })<{ added: boolean }>`
   background-color: ${({ added, theme }) =>
-    added ? theme.colors.textSecondary : theme.colors.primary};
+    added ? theme.colors.textPrimary : theme.colors.primary};
   color: ${({ theme }) => theme.colors.white};
   font-weight: 600;
   padding: 0.5rem 1.25rem;
@@ -63,34 +63,35 @@ const AddButton = styled.button.withConfig({
   min-width: 8rem;
   text-align: center;
   white-space: nowrap;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.textSecondary};
+  }
 `;
 
 interface Props {
   school: {
-    id: number;
-    name: string;
+    userId: string;
+    school_name: string;
     score: number;
   };
-  onAdd: () => void;
-  onRemove?: () => void;
 }
 
 const RecommendedSchoolItem = ({ school }: Props) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const isInCart = cartItems.some((item) => item.id === school.id);
+  const isInCart = cartItems.some((item) => item.school_name === school.school_name);
 
   const handleClick = () => {
     if (isInCart) {
-      dispatch(removeFromCart(school.id));
+      dispatch(removeFromCart(school.school_name));
     } else {
       dispatch(addToCart(school));
     }
   };
 
   const getCategory = (score: number) => {
-    if (score >= 80) return { label: "Safety", color: "#b0c36d" };
-    if (score >= 60) return { label: "Reach", color: "7e673d" };
+    if (score >= 70) return { label: "Safety", color: "#b0c36d" };
+    if (score >= 60) return { label: "Reach", color: "#59421a" };
     if (score >= 40) return { label: "Sub-Target", color: "#FFA07A" };
     return { label: "Target", color: "#F08080" };
   };
@@ -101,7 +102,7 @@ const RecommendedSchoolItem = ({ school }: Props) => {
     <Card>
       <ContentWrapper>
         <Info>
-          <SchoolWrapper>{school.name}</SchoolWrapper>
+          <SchoolWrapper>{school.school_name}</SchoolWrapper>
           <ScoreWrapper>
             Score: {school.score} <Label color={color}>{label}</Label>
           </ScoreWrapper>

@@ -48,7 +48,7 @@ const Dashboard = () => {
 
       {schools.length > 0 ? (
         schools.map((school) => (
-          <DashboardCard key={school.id} school={school} />
+          <DashboardCard key={school.school_name} school={school} />
         ))
       ) : (
         <EmptyMessage>No schools to display yet.</EmptyMessage>
