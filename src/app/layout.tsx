@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR, Fredoka } from "next/font/google";
 import { Providers } from "./providers";
 import ConditionalHeader from "@/components/ConditionalHeader";
+import Footer from "@/components/Footer";
 import "./globals.css";
 import { StyledComponentsRegistry } from "@/lib/styled-components-registry";
 import AuthBridge from "@/components/auth/AuthBridge";
@@ -39,6 +40,7 @@ export default function RootLayout({
             <AuthBridge/>
             <ConditionalHeader />
             {children}
+            <Footer/>
           </Providers>
         </StyledComponentsRegistry>
       </body>

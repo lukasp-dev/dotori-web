@@ -42,6 +42,9 @@ interface CourseCredits {
   language: number;
   social: number;
   arts: number;
+  history: number, 
+  electives: number, 
+  cs: number
 }
 
 interface Props {
@@ -62,6 +65,9 @@ const CourseCreditSection = ({ courseCredits, setCourseCredits }: Props) => {
     { label: "Foreign Language", field: "language" },
     { label: "Social Studies", field: "social" },
     { label: "Visual/Performing Arts", field: "arts" },
+    { label: "History", field: "history" },
+    { label: "Electives", field: "electives" },
+    { label: "Computer Science", field: "cs" },
   ];
 
   return (
