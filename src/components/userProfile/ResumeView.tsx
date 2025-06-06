@@ -15,6 +15,7 @@ const Container = styled.div`
   background-color: white;
   border-radius: 0;
   box-shadow: none;
+  padding: 4rem 0 0 0;
 
   @media (max-width: 768px) {
     margin: 0;
@@ -37,19 +38,13 @@ const ResumeSection = styled.div`
   margin-top: 1rem;
 `;
 
-const ResumeFileName = styled.p`
-  font-size: 1.1rem;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  margin-bottom: 1rem;
-`;
-
 const ResumeViewer = styled.iframe`
   width: 100%;
   height: calc(100vh - 50px);
   min-height: 1200px;
   border: none;
   border-radius: 0;
-  margin: 0;
+  margin-top: 0;
   background-color: white;
 
   @media (max-width: 768px) {
@@ -219,18 +214,8 @@ const ResumeView = () => {
 
   return (
     <Container>
-      <Title>Resume</Title>
-      
       {currentResume ? (
         <ResumeSection>
-          <ResumeFileName>
-            📄 {currentResume.name}
-            {currentResume.contentType && (
-              <span style={{ fontSize: '0.8rem', color: '#666', marginLeft: '0.5rem' }}>
-                ({currentResume.contentType})
-              </span>
-            )}
-          </ResumeFileName>
           <ResumeViewer
             src={getResumeViewerUrl(currentResume.url, currentResume.contentType)}
             title="Resume Preview"

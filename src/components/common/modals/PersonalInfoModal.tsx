@@ -111,6 +111,9 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
     language: 0,
     social: 0,
     arts: 0,
+    history: 0, 
+    electives: 0, 
+    cs: 0
   }); 
   const [hasAlumniRelation, setHasAlumniRelation] = useState<boolean | null>(null);
   const [firstGeneration, setFirstGeneration]= useState<boolean | null>(null);
@@ -236,6 +239,9 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
         language: courseCredits.language,
         social: courseCredits.social,
         arts: courseCredits.arts,
+        history: courseCredits.history, 
+        electives: courseCredits.electives, 
+        cs: courseCredits.cs
       },
     };
   
