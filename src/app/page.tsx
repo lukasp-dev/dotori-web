@@ -4,7 +4,6 @@ import AdmissionFlow from "@/components/AdmissionFlow";
 import Strengths from "@/sections/Strengths";
 import Hero from "@/sections/Hero";
 import GrowingTori from "@/components/GrowingTori";
-import Footer from "@/components/Footer";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -20,16 +19,6 @@ const Main = styled.main`
   text-align: center;
 `;
 
-const Heading = styled.h1`
-  font-size: 2rem;
-  font-weight: bold;
-`;
-
-const Paragraph = styled.p`
-  color: ${(props) => (props.theme.mode === "dark" ? "#d1d5db" : "#6b7280")};
-  margin-top: 1rem;
-`;
-
 export default function Home() {
   return (
     <Wrapper>
@@ -41,7 +30,6 @@ export default function Home() {
           <GrowingTori />
         </Main>
       </ContentWrapper>
-      <Footer/>
     </Wrapper>
   );
 }
