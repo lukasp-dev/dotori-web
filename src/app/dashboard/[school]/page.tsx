@@ -1,7 +1,6 @@
 "use client";
 
 import styled from "styled-components";
-import Dashboard from "@/components/dashboard/Dashboard";
 
 interface SchoolPageProps {
   params: {
