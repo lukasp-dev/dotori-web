@@ -1,3 +1,5 @@
+"use client";
+
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import styled from "styled-components";
@@ -42,16 +44,16 @@ const PurchaseButton = styled.button`
 `;
 
 const CartSummary = () => {
-    const total = useSelector((state: RootState) => state.cart.total);
-    const router = useRouter();
-    return (
-      <SummaryWrapper>
-        <Divider />
-        <Total>Total Amount: ${total}</Total>
-        <PurchaseButton onClick={() => router.push("/payment")}>
-            Purchase
-        </PurchaseButton>
-      </SummaryWrapper>
-    );
+  const total = useSelector((state: RootState) => state.cart.total);
+  const router = useRouter();
+  return (
+    <SummaryWrapper>
+      <Divider />
+      <Total>Total Amount: ${total}</Total>
+      <PurchaseButton onClick={() => router.push("/payment")}>
+        Purchase
+      </PurchaseButton>
+    </SummaryWrapper>
+  );
 };
 export default CartSummary;
