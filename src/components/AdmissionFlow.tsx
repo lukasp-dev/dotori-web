@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import ResumePrompt from "@/components/prompts/ResumePrompt";
 import PersonalInfoModal from "@/components/common/modals/PersonalInfoModal";
 import DashboardPrompt from "@/components/prompts/DashboardPrompt";
+import ContinuePrompt from "@/components/prompts/ContinuePrompt";
 
-type Step = "resume" | "personalInfo" | "dashboard" | null;
+type Step = "resume" | "personalInfo" | "dashboard" | "continue" | null;
 
 const AdmissionFlow = () => {
   const [step, setStep] = useState<Step>("resume");
@@ -15,15 +16,20 @@ const AdmissionFlow = () => {
   useEffect(() => {
     const resumeUploaded = localStorage.getItem("resumeUploaded") === "true";
     const personalInfoCompleted = localStorage.getItem("personalInfoCompleted") === "true";
+    const recommendCompleted = localStorage.getItem("recommendCompleted") === "true";
+    const cartCompleted = localStorage.getItem("cartCompleted") === "true";
+    const paymentCompleted = localStorage.getItem("paymentCompleted") === "true";
     const fromPayment = localStorage.getItem("fromPayment") === "true";
 
-    if (fromPayment) {
+    if (fromPayment || paymentCompleted) {
       setStep("dashboard");
       localStorage.removeItem("fromPayment");
     } else if (!resumeUploaded) {
       setStep("resume");
     } else if (!personalInfoCompleted) {
       setStep("personalInfo");
+    } else if (!recommendCompleted || !cartCompleted || !paymentCompleted) {
+      setStep("continue");
     } else {
       setStep("dashboard");
     }
@@ -38,6 +44,7 @@ const AdmissionFlow = () => {
     localStorage.setItem("personalInfoCompleted", "true");
     router.push("/recommend");
   };
+
   if (step === "resume") {
     return <ResumePrompt onNext={handleResumeUploaded} />;
   }
@@ -55,6 +62,11 @@ const AdmissionFlow = () => {
   if (step === "dashboard") {
     return <DashboardPrompt />;
   }
+
+  if (step === "continue") {
+    return <ContinuePrompt />;
+  }
+
   return null;
 };
 
