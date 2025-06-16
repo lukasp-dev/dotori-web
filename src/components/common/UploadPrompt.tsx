@@ -1,9 +1,10 @@
 "use client";
 
 import styled from "styled-components";
+import { ReactNode } from "react";
 
 interface UploadPromptProps {
-  title: string;
+  title: ReactNode;
   message: string;
   buttonLabel: string;
   onClick: () => void;
@@ -36,7 +37,7 @@ const Message = styled.p`
   color: ${(props) => props.theme.colors.textPrimary};
 `;
 
-const UploadButton = styled.button`
+const UploadButton = styled.button.attrs({ type: 'button' })`
   background-color: ${(props) => props.theme.colors.textPrimary};
   color: ${(props) => props.theme.colors.white};
   font-weight: 600;
