@@ -72,4 +72,4 @@ const ContinuePrompt = () => {
   );
 };
 
-export default ContinuePrompt; 
+export default ContinuePrompt;

@@ -9,5 +9,6 @@ colors: {
     textHover: "#374151",
     primary: "#b0c36d",
     white: "#ffffff",
+    lightGreen: "#e8f4cd",
   },
 };
