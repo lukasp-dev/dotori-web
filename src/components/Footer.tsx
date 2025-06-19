@@ -3,37 +3,39 @@
 import styled from "styled-components";
 import { FaEnvelope, FaCalendarCheck, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { useTheme } from "styled-components";
+import { usePathname } from "next/navigation";
 
-const StyledFooter = styled.footer`
-  background-color: #e8f4cd;
-  color: white;
+const StyledFooter = styled.footer<{ $isDashboardSchool: boolean }>`
+  background-color: ${props => props.$isDashboardSchool ? props.theme.colors.textPrimary : props.theme.colors.lightGreen};
+  color: ${props => props.$isDashboardSchool ? 'white' : 'white'};
   padding: 3rem 1rem;
   font-size: 0.875rem;
   text-align: center;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ $isDashboardSchool: boolean }>`
   max-width: 1100px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   align-items: center;
-  color: ${(props) => props.theme.colors.textPrimary};
+  color: ${props => props.$isDashboardSchool ? 'white' : props.theme.colors.textPrimary};
 `;
 
-const Title = styled.h2`
+const Title = styled.h2<{ $isDashboardSchool: boolean }>`
   font-size: 1.75rem;
   font-weight: bold;
   text-align: center;
+  color: ${props => props.$isDashboardSchool ? 'white' : props.theme.colors.textPrimary};
 `;
 
-const IconRow = styled.div`
+const IconRow = styled.div<{ $isDashboardSchool: boolean }>`
   display: flex;
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
-  color: ${(props) => props.theme.colors.textPrimary};
+  color: ${props => props.$isDashboardSchool ? 'white' : props.theme.colors.textPrimary};
 `;
 
 const IconItem = styled.a`
@@ -48,36 +50,41 @@ const IconItem = styled.a`
   }
 `;
 
-const IconLabel = styled.p`
+const IconLabel = styled.p<{ $isDashboardSchool: boolean }>`
   margin: 0;
   font-size: 0.85rem;
+  color: ${props => props.$isDashboardSchool ? 'white' : 'inherit'};
 `;
 
-const CompanyInfo = styled.div`
+const CompanyInfo = styled.div<{ $isDashboardSchool: boolean }>`
   text-align: center;
   font-size: 0.75rem;
-  color: #aaa;
   line-height: 1.5;
-  color: ${(props) => props.theme.colors.textPrimary};
+  color: ${props => props.$isDashboardSchool ? 'white' : props.theme.colors.textPrimary};
 `;
 
 const Footer = () => {
   const theme = useTheme();
+  const pathname = usePathname();
+  
+  // dashboard/[school] 경로인지 확인 (dashboard/ 다음에 school 이름이 있는 경우만)
+  const isDashboardSchool = pathname.match(/^\/dashboard\/[^\/]+$/) !== null;
+  
   return (
-    <StyledFooter>
-      <Container>
+    <StyledFooter $isDashboardSchool={isDashboardSchool}>
+      <Container $isDashboardSchool={isDashboardSchool}>
         <div>
           <p style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>Always here for every dotori </p>
-          <Title>Equal Opportunities for Students at a Fair Price!</Title>
+          <Title $isDashboardSchool={isDashboardSchool}>Equal Opportunities for Students at a Fair Price!</Title>
           <p>Office Hour (Mon - Fri) | 12:00~17:00</p>
         </div>
-        <IconRow>
+        <IconRow $isDashboardSchool={isDashboardSchool}>
           <IconItem 
             href="mailto:dotoripack@gmail.com"
             style={{ color: "inherit", textDecoration: "none" }}
           >
-            <FaEnvelope size={24} color={theme.colors.textPrimary}/>
-            <IconLabel>Email Us</IconLabel>
+            <FaEnvelope size={24} color={isDashboardSchool ? 'white' : theme.colors.textPrimary}/>
+            <IconLabel $isDashboardSchool={isDashboardSchool}>Email Us</IconLabel>
           </IconItem>
           <IconItem
             href="https://cal.com/dotori-pack/30min"
@@ -85,8 +92,8 @@ const Footer = () => {
             rel="noopener noreferrer"
             style={{ color: "inherit", textDecoration: "none" }}
           >
-            <FaCalendarCheck size={24} color={theme.colors.textPrimary}/>
-            <IconLabel>Appointment</IconLabel>
+            <FaCalendarCheck size={24} color={isDashboardSchool ? 'white' : theme.colors.textPrimary}/>
+            <IconLabel $isDashboardSchool={isDashboardSchool}>Appointment</IconLabel>
           </IconItem>
           <IconItem
             href="https://www.linkedin.com/company/dotoripack"
@@ -94,8 +101,8 @@ const Footer = () => {
             rel="noopener noreferrer"
             style={{ color: "inherit", textDecoration: "none" }}
           >
-              <FaLinkedin size={24} color={theme.colors.textPrimary}/>
-              <IconLabel>LinkedIn</IconLabel>
+              <FaLinkedin size={24} color={isDashboardSchool ? 'white' : theme.colors.textPrimary}/>
+              <IconLabel $isDashboardSchool={isDashboardSchool}>LinkedIn</IconLabel>
           </IconItem>
           <IconItem
             href="https://www.instagram.com/dotori_2025"
@@ -103,12 +110,12 @@ const Footer = () => {
             rel="noopener noreferrer"
             style={{ color: "inherit", textDecoration: "none" }}
           >
-            <FaInstagram size={24} color={theme.colors.textPrimary}/>
-            <IconLabel>Instagram</IconLabel>
+            <FaInstagram size={24} color={isDashboardSchool ? 'white' : theme.colors.textPrimary}/>
+            <IconLabel $isDashboardSchool={isDashboardSchool}>Instagram</IconLabel>
           </IconItem>
         </IconRow>
 
-        <CompanyInfo>
+        <CompanyInfo $isDashboardSchool={isDashboardSchool}>
           Bussiness Name : Dotori Inc. | CEO : Jehoon Park<br/>
           Address : Minneapolis, MN, United States | Email : dotoripack@gmail.com<br/>
           © 2025 Your Company. All rights reserved.

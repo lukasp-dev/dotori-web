@@ -10,6 +10,7 @@ declare module "styled-components" {
       textHover: string;
       primary: string;
       white: string;
+      lightGreen: string;
     };
   }
 }
