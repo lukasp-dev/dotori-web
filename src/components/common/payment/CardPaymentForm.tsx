@@ -44,6 +44,7 @@ const CardPaymentForm = () => {
   const handleSubmit = () => {
     // 가짜 결제 처리105
     localStorage.setItem("fromPayment", "true");
+    localStorage.setItem("paymentCompleted", "true");
     const defaultSteps = {
       ResumeOutline: true,
       FirstDraft: true,
