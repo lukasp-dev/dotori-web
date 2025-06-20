@@ -3,6 +3,7 @@
 import styled from "styled-components";
 import { calculateProgress } from "@/store/dashboard/calculateProgress";
 import { SchoolProgress } from "@/store/dashboard/progressSlice";
+import { useRouter } from "next/navigation";
 
 interface Props {
   school: SchoolProgress;
@@ -52,12 +53,19 @@ const ViewButton = styled.button`
 `;
 
 const DashboardCard = ({ school }: Props) => {
+  const router = useRouter();
+
+  const handleViewClick = () => {
+    const encodedSchoolName = encodeURIComponent(school.school_name);
+    router.push(`/dashboard/${encodedSchoolName}`);
+  };
+
   return (
     <Card>
       <Title>{school.school_name}</Title>
       <BottomRow>
         <span>In Progress</span>
-        <ViewButton>View</ViewButton>
+        <ViewButton onClick={handleViewClick}>View</ViewButton>
       </BottomRow>
     </Card>
   );

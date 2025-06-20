@@ -58,7 +58,7 @@ export default function SchoolPage() {
 }
 
 const PageContainer = styled.div`
-  background-color: #e8f4cd;
+  background-color: ${(props) => props.theme.colors.lightGreen};
   padding: 100px;
 `;
 
