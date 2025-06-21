@@ -5,19 +5,30 @@ import styled from "styled-components";
 interface EssayListProps {
   commonApp: string;
   supplementary: { [key: string]: string };
+  selected: string;
+  onSelectTopic: (key: string) => void;
 }
 
-export default function EssayList({ commonApp, supplementary }: EssayListProps) {
+interface EssayButtonProps {
+    $selected?: boolean;
+}
+
+export default function EssayList({ commonApp, supplementary, selected, onSelectTopic }: EssayListProps) {
   return (
     <Wrapper>
       <Title>Topics</Title>
-      <EssayButton>
+      <EssayButton 
+        onClick={() => onSelectTopic("common_app")}
+        $selected={selected === "common_app"}>
         <strong>Common App Essay</strong>
         <SubText>{commonApp || "Obstacle or Challenge"}</SubText>
       </EssayButton>
 
       {Object.entries(supplementary).map(([key, value], index) => (
-        <EssayButton key={key}>
+        <EssayButton 
+            key={key}
+            onClick={() => onSelectTopic(`supplementary_${key}`)}
+            $selected={selected === `supplementary_${key}`}>
           <strong>{`Supplementary Essay ${index + 1}`}</strong>
           <SubText>{value || "Optional Prompt"}</SubText>
         </EssayButton>
@@ -36,6 +47,7 @@ const Wrapper = styled.div`
   border-radius: 1rem;
   flex-direction: column;
   gap: 1rem;
+  
 `;
 
 const Title = styled.h3`
@@ -47,7 +59,7 @@ const Title = styled.h3`
   color: ${(props) => props.theme.colors.textPrimary};
 `;
 
-const EssayButton = styled.div`
+const EssayButton = styled.div<EssayButtonProps>`
   font-family: var(--font-fredoka);
   font-size: 20px;
   font-weight: 300;
@@ -58,8 +70,13 @@ const EssayButton = styled.div`
   border-radius: 12px;
   padding: 2rem;
   text-align: center;
-  background-color: #fff;
+  background-color: ${({ $selected, theme }) =>
+    $selected ? theme.colors.lightGreen : "#fff"};
+  cursor: pointer;
   transition: all 0.2s ease;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.lightGreen};
+  }
 `;
 
 const SubText = styled.div`
@@ -72,7 +89,7 @@ const SubText = styled.div`
 const GoButton = styled.button`
   margin-top: 2rem;
   align-self: center;
-  background-color: #4e3b26;
+  background-color: ${(props) => props.theme.colors.primary};
   color: white;
   font-family: var(--font-fredoka);
   font-size: 16px;
@@ -82,6 +99,6 @@ const GoButton = styled.button`
   cursor: pointer;
   transition: all 0.2s ease;
   &:hover {
-    background-color: #3b2d1d;
+    background-color: ${(props) => props.theme.colors.textPrimary};
   }
 `;
