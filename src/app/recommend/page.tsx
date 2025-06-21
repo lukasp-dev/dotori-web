@@ -3,6 +3,7 @@
 import styled from "styled-components";
 import RecommendedSchoolList from "@/components/recommended/RecommendedSchoolList";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -44,15 +45,38 @@ const GotoCartButton = styled.button`
   }
 `;
 
+const SignInButton = styled.button`
+  background-color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.white};
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.textPrimary};
+  }
+`;
+
 export default function RecommendPage() {
   const router = useRouter();
+  const { data: session, status } = useSession();
+
   return (
     <Wrapper>
       <RecommendWrapper>
         <RecommendedSchoolList/>
       </RecommendWrapper>
       <GoToCartWrapper>
+        {status === "loading" ? (
+          <p>Loading...</p>
+        ) : session ? (
           <GotoCartButton onClick={() => router.push("/cart")}>Go to Backpack</GotoCartButton>
+        ) : (
+          <SignInButton onClick={() => router.push("/login")}>Sign In</SignInButton>
+        )}
       </GoToCartWrapper>
     </Wrapper>
   );
