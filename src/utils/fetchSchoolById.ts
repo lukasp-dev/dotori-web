@@ -1,7 +1,9 @@
 // utils/fetchSchoolById.ts
 export async function fetchSchoolById(schoolId: string) {
-  const mockMode = process.env.NEXT_PUBLIC_MOCK_MODE === "true";
-  const url = mockMode ? "/mock_schools.json" : `${process.env.NEXT_PUBLIC_API_URL}/api/schools`;
+  const mockMode = true;
+  const url = mockMode
+    ? "/mock_schools.json"
+    : `${process.env.NEXT_PUBLIC_API_URL}/api/schools`;
 
   console.log("Fetching from:", url);
 

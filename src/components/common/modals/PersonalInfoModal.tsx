@@ -12,6 +12,7 @@ import EnglishTestSection from "@/components/common/modals/sections/EnglishTestS
 import { isValidGPA, isValidSAT, isValidACT } from "@/utils/scoreValidator";
 import { uploadPersonalInfo } from "@/app/api/auth/uploadPersonalInfo";
 import { getUserId } from "@/lib/auth/user";
+
 const Title = styled.h2`
   font-family: var(--font-fredoka);
   font-weight: 600;
