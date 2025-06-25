@@ -70,6 +70,7 @@ const AddButton = styled.button.withConfig({
 
 interface Props {
   school: {
+    id: number;
     userId: string;
     school_name: string;
     score: number;
@@ -79,11 +80,11 @@ interface Props {
 const RecommendedSchoolItem = ({ school }: Props) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const isInCart = cartItems.some((item) => item.school_name === school.school_name);
+  const isInCart = cartItems.some((item) => item.id === school.id);
 
   const handleClick = () => {
     if (isInCart) {
-      dispatch(removeFromCart(school.school_name));
+      dispatch(removeFromCart(school.id));
     } else {
       dispatch(addToCart(school));
     }

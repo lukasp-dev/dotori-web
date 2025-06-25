@@ -57,6 +57,7 @@ const CardPaymentForm = () => {
     dispatch(
       initProgress(
         cartItems.map((school) => ({
+          id: school.id,
           userId: school.userId,
           school_name: school.school_name,
           steps: { ...defaultSteps },

@@ -15,17 +15,16 @@ import SchoolMap from "@/components/dashboard/school/SchoolMapClientOnly";
 
 export default function SchoolPage() {
   const params = useParams();
-  const decodedSchoolName = decodeURIComponent(params.school as string);
+  const schoolId = Number(params.school);
   const [data, setData] = useState<any | null>(null);
 
   useEffect(() => {
-    if (!decodedSchoolName) return;
-    fetchSchoolById(decodedSchoolName)
+    if (!schoolId) return;
+    fetchSchoolById(schoolId)
       .then(setData)
-      .catch((err) => console.error(err));
-  }, [decodedSchoolName]);
+      .catch(() => setData(null));
+  }, [schoolId]);
 
-  if (typeof window === "undefined") return null;
   if (!data) {
     return <div>Loading...</div>;
   }

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface School {
+  id: number;
   userId: string;
   school_name: string;
   score: number;
@@ -21,14 +22,14 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<School>) => {
-      const exists = state.items.find((item) => item.school_name === action.payload.school_name);
+      const exists = state.items.find((item) => item.id === action.payload.id);
       if (!exists) {
         state.items.push(action.payload);
         state.total += 100; 
       }
     },
-    removeFromCart: (state, action: PayloadAction<string>) => {
-      const index = state.items.findIndex((item) => item.school_name === action.payload);
+    removeFromCart: (state, action: PayloadAction<number>) => {
+      const index = state.items.findIndex((item) => item.id === action.payload);
       if (index !== -1) {
         state.items.splice(index, 1);
         state.total -= 100;

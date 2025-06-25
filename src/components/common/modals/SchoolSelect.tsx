@@ -1,21 +1,34 @@
 import Select from "react-select";
-
-const schoolOptions = [
-  { label: "Georgia Tech", value: "Georgia Tech" },
-  { label: "NYU", value: "NYU" },
-  { label: "University of Minnesota", value: "University of Minnesota" },
-  { label: "U Georgia", value: "U Georgia" },
-];
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 interface SchoolSelectProps {
-  onSelect: (schools: string[]) => void;
-  selectedSchools: string[];
+  onSelect: (schoolId: number[]) => void;
+  selectedSchools: number[];
+}
+interface School {
+  label: string;
+  value: number;
 }
 
 const SchoolSelect = ({ onSelect, selectedSchools }: SchoolSelectProps) => {
-  const selectedOptions = schoolOptions.filter(opt =>
-    selectedSchools.includes(opt.value)
-  );
+  const [schoolOptions, setSchoolOptions] = useState<School[]>([]);
+  
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/schools") // Need to be changed to the actual API endpoint
+      .then((response) => {
+        const options = response.data.map((school: any) => ({
+          label: school.label,
+          value: school.value
+        }));
+        setSchoolOptions(options);
+      })
+      .catch((error) => console.error("Error fetching schools:", error));
+    }, []);
+
+    const selectedOptions = schoolOptions.filter(opt =>
+      selectedSchools.includes(opt.value)
+    );
 
   return (
     <Select
