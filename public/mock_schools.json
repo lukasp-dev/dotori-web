@@ -1,70 +1,282 @@
-{
-    "id": 24,
-    "name": "university of minnesota - twin cities campus",
-    "rankings": {
-        "niche": {
-            "total_rank": 59,
-            "majors_rank": [
-                {
-                    "field": "Agricultural Science",
-                    "rank": 19,
-                    "total": 152
-                },
-                {
-                    "field": "Information Technology",
-                    "rank": 23,
-                    "total": 292
-                }
-            ]
+[
+    {
+        "id": 24,
+        "name": "New York University (NYU)",
+        "rankings": {
+            "niche": {
+                "total_rank": 40,
+                "majors_rank": [
+                    {
+                        "field": "Performing Arts",
+                        "rank": 1,
+                        "total": 559
+                    },
+                    {
+                        "field": "Film & Photography",
+                        "rank": 3,
+                        "total": 285
+                    }
+                ]
+            },
+            "us": 30,
+            "qs": 55
         },
-        "us": 48,
-        "qs": 200
-    },
-    "location": {
-        "state": "MN",
-        "coordinates": {
-            "latitude": 44.97399,
-            "longitude": -93.2277285
+        "location": {
+            "state": "NY",
+            "coordinates": {
+                "latitude": 40.7291,
+                "longitude": -73.9965
+            }
+        },
+        "essays": {
+            "common_app": "Obstacle or Challenge",
+            "supplementary": {
+                "0": "Optional Prompt",
+                "1": "Optional Prompt"
+            },
+            "importance_table": {
+                "Rigor of Secondary School Record": "Very Important",
+                "GPA": "Very Important",
+                "Standardized Test Scores": "Important",
+                "Essays": "Important",
+                "Interview": "Considered",
+                "Extracurricular": "Important",
+                "Talent/Ability": "Important",
+                "Character/Personal Qualities": "Considered",
+                "First Generation": "Considered",
+                "Alumni Relation": "Considered",
+                "Geographical Residence": "Considered",
+                "State Residency": "Not Considered"
+            }
+        },
+        "matching_score": {
+            "applicant": "4b34dfc4-fb21-4a9b-886a-126e1428a744",
+            "school_id": 24,
+            "score": 33.43,
+            "details": {
+                "alumni": 0.0,
+                "residency": 1.3,
+                "standardized_test": 16.46,
+                "GPA": 22.66,
+                "volunteer_work": 20.22
+            },
+            "max_score": {
+                "alumni": 0.0,
+                "residency": 25.78,
+                "standardized_test": 20.22,
+                "GPA": 25.78,
+                "volunteer_work": 20.22
+            }
         }
     },
-    "essays": {
-        "common_app": "Obstacle or Challenge",
-        "supplementary": {
-            "0": "Optional Prompt",
-            "1": "Optional Prompt"
+    {
+        "id": 31,
+        "name": "Georgia Institute of Technology",
+        "rankings": {
+            "niche": {
+                "total_rank": 30,
+                "majors_rank": [
+                    {
+                        "field": "Top Public Universities",
+                        "rank": 4,
+                        "total": 602
+                    },
+                    {
+                        "field": "Engineering",
+                        "rank": 7,
+                        "total": 492
+                    }
+                ]
+            },
+            "us": 33,
+            "qs": 123
         },
-        "importance_table": {
-            "Rigor of Secondary School Record": "Very Important",
-            "GPA": "Very Important",
-            "Standardized Test Scores": "Important",
-            "Essays": "Important",
-            "Interview": "Considered",
-            "Extracurricular": "Important",
-            "Talent/Ability": "Important",
-            "Character/Personal Qualities": "Considered",
-            "First Generation": "Considered",
-            "Alumni Relation": "Considered",
-            "Geographical Residence": "Considered",
-            "State Residency": "Not Considered"
+        "location": {
+            "state": "GA",
+            "coordinates": {
+                "latitude": 33.7756,
+                "longitude": -84.3963
+            }
+        },
+        "essays": {
+            "common_app": "Obstacle or Challenge",
+            "supplementary": {
+                "0": "Optional Prompt",
+                "1": "Optional Prompt"
+            },
+            "importance_table": {
+                "Rigor of Secondary School Record": "Very Important",
+                "GPA": "Very Important",
+                "Standardized Test Scores": "Important",
+                "Essays": "Important",
+                "Interview": "Considered",
+                "Extracurricular": "Important",
+                "Talent/Ability": "Important",
+                "Character/Personal Qualities": "Considered",
+                "First Generation": "Considered",
+                "Alumni Relation": "Considered",
+                "Geographical Residence": "Considered",
+                "State Residency": "Not Considered"
+            }
+        },
+        "matching_score": {
+            "applicant": "4b34dfc4-fb21-4a9b-886a-126e1428a744",
+            "school_id": 31,
+            "score": 34.43,
+            "details": {
+                "alumni": 0.0,
+                "residency": 1.3,
+                "standardized_test": 17.46,
+                "GPA": 22.66,
+                "volunteer_work": 20.22
+            },
+            "max_score": {
+                "alumni": 0.0,
+                "residency": 25.78,
+                "standardized_test": 20.22,
+                "GPA": 25.78,
+                "volunteer_work": 20.22
+            }
         }
     },
-    "matching_score": {
-        "applicant": "4b34dfc4-fb21-4a9b-886a-126e1428a744",
-        "school_id": 24,
-        "score": 47.43,
-        "details": {
-            "alumni": 0.0,
-            "residency": 1.3,
-            "standardized_test": 18.46,
-            "GPA": 24.66,
-            "volunteer_work": 22.22
+    {
+        "id": 45,
+        "name": "University of Georgia",
+        "rankings": {
+            "niche": {
+                "total_rank": 52,
+                "majors_rank": [
+                    {
+                        "field": "Business",
+                        "rank": 6,
+                        "total": 1221
+                    },
+                    {
+                        "field": "Sports Management",
+                        "rank": 5,
+                        "total": 448
+                    }
+                ]
+            },
+            "us": 46,
+            "qs": 200
         },
-        "max_score": {
-            "alumni": 0.0,
-            "residency": 27.78,
-            "standardized_test": 22.22,
-            "GPA": 27.78,
-            "volunteer_work": 22.22
+        "location": {
+            "state": "MN",
+            "coordinates": {
+                "latitude": 44.97399,
+                "longitude": -93.2277285
+            }
+        },
+        "essays": {
+            "common_app": "Obstacle or Challenge",
+            "supplementary": {
+                "0": "Optional Prompt",
+                "1": "Optional Prompt"
+            },
+            "importance_table": {
+                "Rigor of Secondary School Record": "Very Important",
+                "GPA": "Very Important",
+                "Standardized Test Scores": "Important",
+                "Essays": "Important",
+                "Interview": "Considered",
+                "Extracurricular": "Important",
+                "Talent/Ability": "Important",
+                "Character/Personal Qualities": "Considered",
+                "First Generation": "Considered",
+                "Alumni Relation": "Considered",
+                "Geographical Residence": "Considered",
+                "State Residency": "Not Considered"
+            }
+        },
+        "matching_score": {
+            "applicant": "4b34dfc4-fb21-4a9b-886a-126e1428a744",
+            "school_id": 24,
+            "score": 47.43,
+            "details": {
+                "alumni": 0.0,
+                "residency": 1.3,
+                "standardized_test": 18.46,
+                "GPA": 24.66,
+                "volunteer_work": 22.22
+            },
+            "max_score": {
+                "alumni": 0.0,
+                "residency": 27.78,
+                "standardized_test": 22.22,
+                "GPA": 27.78,
+                "volunteer_work": 22.22
+            }
+        }
+    },
+    {
+        "id": 46,
+        "name": "University of Minnesota Twin Cities",
+        "rankings": {
+            "niche": {
+                "total_rank": 59,
+                "majors_rank": [
+                    {
+                        "field": "Agricultural Science",
+                        "rank": 19,
+                        "total": 152
+                    },
+                    {
+                        "field": "Information Technology",
+                        "rank": 23,
+                        "total": 292
+                    }
+                ]
+            },
+            "us": 48,
+            "qs": 200
+        },
+        "location": {
+            "state": "MN",
+            "coordinates": {
+                "latitude": 44.97399,
+                "longitude": -93.2277285
+            }
+        },
+        "essays": {
+            "common_app": "Obstacle or Challenge",
+            "supplementary": {
+                "0": "Optional Prompt",
+                "1": "Optional Prompt"
+            },
+            "importance_table": {
+                "Rigor of Secondary School Record": "Very Important",
+                "GPA": "Very Important",
+                "Standardized Test Scores": "Important",
+                "Essays": "Important",
+                "Interview": "Considered",
+                "Extracurricular": "Important",
+                "Talent/Ability": "Important",
+                "Character/Personal Qualities": "Considered",
+                "First Generation": "Considered",
+                "Alumni Relation": "Considered",
+                "Geographical Residence": "Considered",
+                "State Residency": "Not Considered"
+            }
+        },
+        "matching_score": {
+            "applicant": "4b34dfc4-fb21-4a9b-886a-126e1428a744",
+            "school_id": 24,
+            "score": 47.43,
+            "details": {
+                "alumni": 0.0,
+                "residency": 1.3,
+                "standardized_test": 18.46,
+                "GPA": 24.66,
+                "volunteer_work": 22.22
+            },
+            "max_score": {
+                "alumni": 0.0,
+                "residency": 27.78,
+                "standardized_test": 22.22,
+                "GPA": 27.78,
+                "volunteer_work": 22.22
+            }
         }
     }
-}
+]

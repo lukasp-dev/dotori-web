@@ -36,8 +36,8 @@ const OptionButton = styled.button<{ selected: boolean }>`
 interface AlumniSectionProps {
   hasAlumniRelation: boolean | null;
   setHasAlumniRelation: (b: boolean) => void;
-  alumniSchool: string[];
-  setAlumniSchool: (arr: string[]) => void;
+  alumniSchool: number[];
+  setAlumniSchool: (arr: number[]) => void;
 }
 
 const AlumniSection = ({
@@ -46,8 +46,8 @@ const AlumniSection = ({
   alumniSchool,
   setAlumniSchool,
 }: AlumniSectionProps) => {
-  const handleSelect = (schools: string[]) => {
-    setAlumniSchool(schools);
+  const handleSelect = (schoolId: number[]) => {
+    setAlumniSchool(schoolId);
   };
 
   return (

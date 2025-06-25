@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   justify-content: center; 
   align-items: center;
   gap: 1.5rem;
-  margin-top: 10rem;
+  margin-top: 3rem;
   margin-bottom: 10rem;
   width: 100%;
 `;

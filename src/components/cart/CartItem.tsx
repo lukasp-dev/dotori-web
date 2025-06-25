@@ -6,6 +6,7 @@ import { removeFromCart } from "@/store/cartSlice";
 
 interface Props {
   school: {
+    id: number;
     userId: string;
     school_name: string;
     score: number;
@@ -57,7 +58,7 @@ const CartItem = ({ school }: Props) => {
   const dispatch = useDispatch();
 
   const handleRemove = () => {
-    dispatch(removeFromCart(school.school_name));
+    dispatch(removeFromCart(school.id));
   };
   return (
     <CartItemWrapper>

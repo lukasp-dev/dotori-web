@@ -1,5 +1,5 @@
 // utils/fetchSchoolById.ts
-export async function fetchSchoolById(schoolId: string) {
+export async function fetchSchoolById(schoolId: number) {
   const mockMode = true;
   const url = mockMode
     ? "/mock_schools.json"
@@ -13,5 +13,5 @@ export async function fetchSchoolById(schoolId: string) {
   }
 
   const data = await response.json();
-  return data;
+  return data.find((school: any) => school.id === schoolId);
 }

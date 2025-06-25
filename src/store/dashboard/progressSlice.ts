@@ -10,6 +10,7 @@ export interface SchoolSteps {
 }
 
 export interface SchoolProgress {
+  id: number;
   userId: string;
   school_name: string;
   steps: SchoolSteps;

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface School {
+  id: number;
   userId: string;
   school_name: string;
   score: number;
@@ -9,11 +10,13 @@ interface School {
 export const fetchDemoSchools = createAsyncThunk(
   "allSchools/fetch",
   async () => {
-    const response = await fetch("/mock_recommendations.json");
+    const response = await fetch("/mock_schools.json");
     const data = await response.json();
     return data.map((item: any) => ({
-      ...item,
-      school_name: item.school_name || item.name,
+      id: item.id,
+      userId: item.matching_score?.applicant || "",
+      school_name: item.name,
+      score: item.matching_score?.score || 0,
     }))
     // TODO: use this once we have a real API
     // console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);

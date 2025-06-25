@@ -56,8 +56,7 @@ const DashboardCard = ({ school }: Props) => {
   const router = useRouter();
 
   const handleViewClick = () => {
-    const encodedSchoolName = encodeURIComponent(school.school_name);
-    router.push(`/dashboard/${encodedSchoolName}`);
+    router.push(`/dashboard/${school.id}`);
   };
 
   return (
