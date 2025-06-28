@@ -41,13 +41,16 @@ export default function EssayList({ commonApp, supplementary, selected, onSelect
 
 const Wrapper = styled.div`
   display: flex;
-  flex: 1;
-  background-color: white;
-  padding: 1.5rem 1.5rem 0.8rem 1.5rem;
-  border-radius: 1rem;
   flex-direction: column;
   gap: 1rem;
-  
+  height: 70vh;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
 `;
 
 const Title = styled.h3`
@@ -56,6 +59,8 @@ const Title = styled.h3`
   font-weight: 600;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
   color: ${(props) => props.theme.colors.textPrimary};
 `;
 
@@ -77,6 +82,11 @@ const EssayButton = styled.div<EssayButtonProps>`
   &:hover {
     background-color: ${(props) => props.theme.colors.lightGreen};
   }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+    font-size: 15px;
+  }
 `;
 
 const SubText = styled.div`
@@ -84,6 +94,10 @@ const SubText = styled.div`
   font-size: 14px;
   color: ${(props) => props.theme.colors.textSecondary};
   margin-top: 6px;
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
 `;
 
 const GoButton = styled.button`

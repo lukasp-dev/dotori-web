@@ -5,13 +5,13 @@ import styled from "styled-components";
 import { formatTitle } from "@/utils/essayTopics";
 
 const Container = styled.div`
-  flex: 3;
+  flex: 1;
   background-color: white;
   border-radius: 1rem;
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 70vh;
   align-items: center;
 `;
 
@@ -24,8 +24,8 @@ const EssayTitle = styled.h3`
 `;
 
 const EssayTextarea = styled.textarea`
-  width: 100%;
-  height: 500px;
+  flex: 1;
+  width: 90%;
   font-family: var(--font-fredoka);
   font-size: 16px;
   line-height: 1.6;
@@ -33,9 +33,7 @@ const EssayTextarea = styled.textarea`
   border: 1px solid ${(props) => props.theme.colors.border};
   border-radius: 0.75rem;
   padding: 1rem;
-  resize: vertical;
-  background-color: #fdfdfd;
-  transition: border-color 0.2s ease;
+  background-color:${(props) => props.theme.colors.white};
 
   &:focus {
     outline: none;
