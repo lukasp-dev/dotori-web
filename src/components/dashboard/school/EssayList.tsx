@@ -1,6 +1,7 @@
 "use client";
 
 import styled from "styled-components";
+import { useRouter, useParams } from "next/navigation";
 
 interface EssayListProps {
   commonApp: string;
@@ -8,6 +9,14 @@ interface EssayListProps {
 }
 
 export default function EssayList({ commonApp, supplementary }: EssayListProps) {
+  const router = useRouter();
+  const params = useParams();
+  const schoolId = params.school;
+
+  const handleGoEssay = () => {
+    router.push(`/dashboard/${schoolId}/essay`);
+  };
+
   return (
     <Wrapper>
       <Title>Essays</Title>
@@ -23,7 +32,7 @@ export default function EssayList({ commonApp, supplementary }: EssayListProps) 
         </EssayButton>
       ))}
 
-      <GoButton>go to essay</GoButton>
+      <GoButton onClick={handleGoEssay}>go to essay</GoButton>
     </Wrapper>
   );
 }
