@@ -118,7 +118,7 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
   }); 
   const [hasAlumniRelation, setHasAlumniRelation] = useState<boolean | null>(null);
   const [firstGeneration, setFirstGeneration]= useState<boolean | null>(null);
-  const [alumniSchool, setAlumniSchool] = useState<string[]>([]);
+  const [alumniSchool, setAlumniSchool] = useState<number[]>([]);
   const [residencyStatus, setResidencyStatus] = useState<"Domestic" | "International" | "">("");
   const [residencyState, setResidencyState] = useState("");
   const [residencyCountry, setResidencyCountry] = useState("");
@@ -219,7 +219,7 @@ const PersonalInfoFlowModal = ({ onUpload, onNext }: PersonalInfoFlowModalProps)
       volunteer: v,
       alumniRelation: {
         hasRelation: hasAlumniRelation,
-        schoolNames: hasAlumniRelation ? alumniSchool : undefined,
+        schoolNames: hasAlumniRelation ? alumniSchool.map(String) : undefined,
       },
       residency: {
         status: residencyStatus,

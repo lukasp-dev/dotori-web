@@ -31,6 +31,17 @@ model User {
   @@map("users")
 }
 
+model EssayTopics {
+  id        String   @id @default(uuid())
+  schoolId  Int      @map("school_id")
+  type      String   // 'common_app' 또는 'supplementary'
+  prompt    String
+  order     Int?     // supplementary 에세이의 순서 (common_app은 null)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("essay_topics")
+}
 
 
 model Account {

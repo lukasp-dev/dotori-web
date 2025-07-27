@@ -84,7 +84,7 @@ const ProfileDrawer = ({ isOpen, onClose }: ProfileDrawerProps) => {
                         onClose();
                     }}
                 >
-                    Logout 
+                    ⍈ Logout 
                 </DrawerItem>
             </Panel>
         </>

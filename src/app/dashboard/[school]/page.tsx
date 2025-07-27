@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 import { fetchSchoolById } from "@/utils/fetchSchoolById";
+import { fetchEssayTopics } from "@/utils/fetchEssayTopics";
 
 import SchoolHeader from "@/components/dashboard/school/SchoolHeader";
 import SchoolRanking from "@/components/dashboard/school/SchoolRanking";
@@ -17,12 +18,20 @@ export default function SchoolPage() {
   const params = useParams();
   const schoolId = Number(params.school);
   const [data, setData] = useState<any | null>(null);
+  const [essayTopics, setEssayTopics] = useState<any | null>(null);
 
   useEffect(() => {
     if (!schoolId) return;
+    
+    // 학교 기본 정보 가져오기 (mock data)
     fetchSchoolById(schoolId)
       .then(setData)
       .catch(() => setData(null));
+    
+    // 에세이 토픽 가져오기 (API)
+    fetchEssayTopics(schoolId)
+      .then(setEssayTopics)
+      .catch(() => setEssayTopics(null));
   }, [schoolId]);
 
   if (!data) {
@@ -41,8 +50,8 @@ export default function SchoolPage() {
       <ContentWrapper>
         <LeftColumn>
           <EssayList
-            commonApp={data.essays.common_app}
-            supplementary={data.essays.supplementary}
+            commonApp={essayTopics?.common_app || data.essays.common_app}
+            supplementary={essayTopics?.supplementary || data.essays.supplementary}
           />
           <ImportanceTable data={data.essays.importance_table} />
         </LeftColumn>

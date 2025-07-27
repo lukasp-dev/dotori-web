@@ -26,20 +26,17 @@ const AdmissionFlow = () => {
     const personalInfoCompleted = localStorage.getItem("personalInfoCompleted") === "true";
     const recommendCompleted = localStorage.getItem("recommendCompleted") === "true";
     const cartCompleted = localStorage.getItem("cartCompleted") === "true";
-    const paymentCompleted = localStorage.getItem("paymentCompleted") === "true";
-    const fromPayment = localStorage.getItem("fromPayment") === "true";
 
-    if (fromPayment || paymentCompleted) {
-      setStep("dashboard");
-      localStorage.removeItem("fromPayment");
-    } else if (!resumeUploaded) {
+    if (!resumeUploaded) {
       setStep("resume");
     } else if (!personalInfoCompleted) {
       setStep("personalInfo");
-    } else if (!recommendCompleted || !cartCompleted || !paymentCompleted) {
+    } else if (!recommendCompleted) {
       setStep("continue");
-    } else {
+    } else if (cartCompleted) {
       setStep("dashboard");
+    } else {
+      setStep("continue");
     }
   }, [session, status]);
 
