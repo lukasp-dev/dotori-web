@@ -9,12 +9,10 @@ export interface School {
 
 export interface CartState {
   items: School[];
-  total: number;
 }
 
 const initialState: CartState = {
   items: [],
-  total: 0,
 };
 
 const cartSlice = createSlice({
@@ -25,19 +23,16 @@ const cartSlice = createSlice({
       const exists = state.items.find((item) => item.id === action.payload.id);
       if (!exists) {
         state.items.push(action.payload);
-        state.total += 100; 
       }
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
       const index = state.items.findIndex((item) => item.id === action.payload);
       if (index !== -1) {
         state.items.splice(index, 1);
-        state.total -= 100;
       }
     },
     clearCart: (state) => {
       state.items = [];
-      state.total = 0;
     },
   },
 });

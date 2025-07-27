@@ -1,9 +1,10 @@
 "use client";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store";
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
+import { initProgress } from "@/store/dashboard/progressSlice";
 
 const Divider = styled.hr`
   border: none;
@@ -19,13 +20,6 @@ const SummaryWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 3rem;
-`;
-
-const Total = styled.div`
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  margin-bottom: 1rem;
 `;
 
 const PurchaseButton = styled.button`
@@ -44,14 +38,31 @@ const PurchaseButton = styled.button`
 `;
 
 const CartSummary = () => {
-  const total = useSelector((state: RootState) => state.cart.total);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  
+  const handleConfirm = () => {
+    dispatch(
+      initProgress(
+        cartItems.map((school) => ({
+          id: school.id,
+          userId: school.userId,
+          school_name: school.school_name,
+        }))
+      )
+    );
+
+    localStorage.setItem("recommendCompleted", "true");
+    localStorage.setItem("cartCompleted", "true");
+    router.push("/");
+  };
+
   return (
     <SummaryWrapper>
       <Divider />
-      <Total>Total Amount: ${total}</Total>
-      <PurchaseButton onClick={() => router.push("/payment")}>
-        Purchase
+      <PurchaseButton onClick={handleConfirm}>
+        Confirm
       </PurchaseButton>
     </SummaryWrapper>
   );

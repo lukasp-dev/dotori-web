@@ -55,6 +55,7 @@ const ViewButton = styled.button`
 const DashboardCard = ({ school }: Props) => {
   const router = useRouter();
 
+  // Creating a school_id url 
   const handleViewClick = () => {
     router.push(`/dashboard/${school.id}`);
   };
