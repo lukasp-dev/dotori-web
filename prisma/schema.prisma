@@ -32,13 +32,16 @@ model User {
 }
 
 model EssayTopics {
-  id        String   @id @default(uuid())
-  schoolId  Int      @map("school_id")
-  type      String   // 'common_app' 또는 'supplementary'
-  prompt    String
-  order     Int?     // supplementary 에세이의 순서 (common_app은 null)
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id          String   @id @default(uuid())
+  schoolId    Int      @map("school_id")
+  type        String   // 'common_app' 또는 'supplementary'
+  prompt      String
+  order       Int?     // supplementary 에세이의 순서 (common_app은 null)
+  year        Int      // 에세이 연도 (예: 2025)
+  wordLimit   Int?     // 글자수 제한 (null이면 제한 없음)
+  isRequired  Boolean  @default(true) // 필수 여부
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("essay_topics")
 }

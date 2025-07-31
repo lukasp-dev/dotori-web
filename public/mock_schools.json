@@ -1,5 +1,75 @@
 [
     {
+        "id": 5,
+        "name": "University of Chicago",
+        "rankings": {
+            "niche": {
+                "total_rank": 40,
+                "majors_rank": [
+                    {
+                        "field": "Performing Arts",
+                        "rank": 1,
+                        "total": 559
+                    },
+                    {
+                        "field": "Film & Photography",
+                        "rank": 3,
+                        "total": 285
+                    }
+                ]
+            },
+            "us": 30,
+            "qs": 55
+        },
+        "location": {
+            "state": "NY",
+            "coordinates": {
+                "latitude": 40.7291,
+                "longitude": -73.9965
+            }
+        },
+        "essays": {
+            "common_app": "Obstacle or Challenge",
+            "supplementary": {
+                "0": "Optional Prompt",
+                "1": "Optional Prompt"
+            },
+            "importance_table": {
+                "Rigor of Secondary School Record": "Very Important",
+                "GPA": "Very Important",
+                "Standardized Test Scores": "Important",
+                "Essays": "Important",
+                "Interview": "Considered",
+                "Extracurricular": "Important",
+                "Talent/Ability": "Important",
+                "Character/Personal Qualities": "Considered",
+                "First Generation": "Considered",
+                "Alumni Relation": "Considered",
+                "Geographical Residence": "Considered",
+                "State Residency": "Not Considered"
+            }
+        },
+        "matching_score": {
+            "applicant": "4b34dfc4-fb21-4a9b-886a-126e1428a744",
+            "school_id": 24,
+            "score": 33.43,
+            "details": {
+                "alumni": 0.0,
+                "residency": 1.3,
+                "standardized_test": 16.46,
+                "GPA": 22.66,
+                "volunteer_work": 20.22
+            },
+            "max_score": {
+                "alumni": 0.0,
+                "residency": 25.78,
+                "standardized_test": 20.22,
+                "GPA": 25.78,
+                "volunteer_work": 20.22
+            }
+        }
+    },
+    {
         "id": 24,
         "name": "New York University (NYU)",
         "rankings": {

@@ -1,7 +1,6 @@
 "use client";
 
 import styled from "styled-components";
-import { calculateProgress } from "@/store/dashboard/calculateProgress";
 import { SchoolProgress } from "@/store/dashboard/progressSlice";
 import { useRouter } from "next/navigation";
 

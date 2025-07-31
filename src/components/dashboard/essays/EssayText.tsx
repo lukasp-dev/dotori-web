@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { formatTitle } from "@/utils/essayTopics";
 
 const Container = styled.div`
   flex: 1;
@@ -17,10 +16,13 @@ const Container = styled.div`
 
 const EssayTitle = styled.h3`
   font-family: var(--font-fredoka);
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 600;
   margin-bottom: 1rem;
   color: ${(props) => props.theme.colors.textPrimary};
+  text-align: center;
+  max-width: 100%;
+  word-wrap: break-word;
 `;
 
 const EssayTextarea = styled.textarea`
@@ -43,30 +45,34 @@ const EssayTextarea = styled.textarea`
 `;
 
 interface EssayViewerProps {
-  title: string; // ex: "common_app", "supplementary_0"
-  text: string;  // prompt
+  title: string; // essay key
+  text: string;  // essay topic
 }
 
 export default function EssayViewer({ title, text }: EssayViewerProps) {
   const [value, setValue] = useState("");
 
-  // Handle LocalStorage
+  // Handle LocalStorage - 에세이 내용만 저장
   useEffect(() => {
-    const saved = localStorage.getItem(`essay_${title}`);
-    setValue(saved || text + "'s Essay");
-  }, [title, text]);
+    const saved = localStorage.getItem(`essay_content_${title}`);
+    setValue(saved || "");
+  }, [title]);
 
-  // Save to LocalStorage when user types
+  // Save to LocalStorage when user types - 에세이 내용만 저장
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
     setValue(newValue);
-    localStorage.setItem(`essay_${title}`, newValue);
+    localStorage.setItem(`essay_content_${title}`, newValue);
   };
 
   return (
     <Container>
-      <EssayTitle>{formatTitle(title)}</EssayTitle>
-      <EssayTextarea value={value} onChange={handleChange} />
+      <EssayTitle>{text}</EssayTitle>
+      <EssayTextarea 
+        value={value} 
+        onChange={handleChange}
+        placeholder="Write your essay here..."
+      />
     </Container>
   );
 }

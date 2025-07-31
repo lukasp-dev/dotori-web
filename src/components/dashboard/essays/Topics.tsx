@@ -3,7 +3,6 @@
 import styled from "styled-components";
 
 interface EssayListProps {
-  commonApp: string;
   supplementary: { [key: string]: string };
   selected: string;
   onSelectTopic: (key: string) => void;
@@ -13,24 +12,18 @@ interface EssayButtonProps {
     $selected?: boolean;
 }
 
-export default function EssayList({ commonApp, supplementary, selected, onSelectTopic }: EssayListProps) {
+export default function EssayList({ supplementary, selected, onSelectTopic }: EssayListProps) {
   return (
     <Wrapper>
       <Title>Topics</Title>
-      <EssayButton 
-        onClick={() => onSelectTopic("common_app")}
-        $selected={selected === "common_app"}>
-        <strong>Common App Essay</strong>
-        <SubText>{commonApp || "Obstacle or Challenge"}</SubText>
-      </EssayButton>
 
       {Object.entries(supplementary).map(([key, value], index) => (
         <EssayButton 
             key={key}
-            onClick={() => onSelectTopic(`supplementary_${key}`)}
-            $selected={selected === `supplementary_${key}`}>
+            onClick={() => onSelectTopic(key)}
+            $selected={selected === key}>
           <strong>{`Supplementary Essay ${index + 1}`}</strong>
-          <SubText>{value || "Optional Prompt"}</SubText>
+          <SubText>{value === "This school has no supplementary essays" ? value : "Click to view essay topic"}</SubText>
         </EssayButton>
       ))}
 

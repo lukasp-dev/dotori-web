@@ -15,15 +15,18 @@ const SchoolSelect = ({ onSelect, selectedSchools }: SchoolSelectProps) => {
   const [schoolOptions, setSchoolOptions] = useState<School[]>([]);
   
   useEffect(() => {
-    axios.get("http://localhost:8080/api/schools") // Need to be changed to the actual API endpoint
+    axios.get("http://localhost:8080/api/schools")
       .then((response) => {
         const options = response.data.map((school: any) => ({
-          label: school.label,
-          value: school.value
+          label: school.schoolName,
+          value: school.id
         }));
         setSchoolOptions(options);
       })
-      .catch((error) => console.error("Error fetching schools:", error));
+      .catch((error) => {
+        console.error("Error fetching schools:", error);
+        console.error("Error details:", error.response?.data || error.message);
+      });
     }, []);
 
     const selectedOptions = schoolOptions.filter(opt =>
