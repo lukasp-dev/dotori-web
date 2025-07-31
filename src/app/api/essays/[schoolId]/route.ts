@@ -24,7 +24,10 @@ export async function GET(
         id: true,
         type: true, // 'common_app' 또는 'supplementary'
         prompt: true,
-        order: true // supplementary 에세이의 순서
+        order: true, // supplementary 에세이의 순서
+        year: true,
+        wordLimit: true,
+        isRequired: true
       },
       orderBy: [
         { type: 'asc' },
@@ -42,14 +45,19 @@ export async function GET(
     // 응답 형식을 기존 mock data 구조와 맞춤
     const response = {
       common_app: '',
-      supplementary: {} as { [key: string]: string }
+      supplementary: {} as { [key: string]: any }
     };
 
     essayTopics.forEach(topic => {
       if (topic.type === 'common_app') {
         response.common_app = topic.prompt;
       } else if (topic.type === 'supplementary') {
-        response.supplementary[topic.order.toString()] = topic.prompt;
+        response.supplementary[topic.order.toString()] = {
+          prompt: topic.prompt,
+          year: topic.year,
+          wordLimit: topic.wordLimit,
+          isRequired: topic.isRequired
+        };
       }
     });
 

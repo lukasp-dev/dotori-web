@@ -8,18 +8,27 @@ import { formatTitle } from "@/utils/essayTopics";
 import ChatBox from "@/components/dashboard/essays/ChatBox";
 import { useParams } from "next/navigation";
 import { fetchSchoolById } from "@/utils/fetchSchoolById";
+import { fetchEssayTopics } from "@/utils/fetchEssayTopics";
 
 export default function EssayPage() {
   const params = useParams();
   const schoolId = Number(params.school);
   const [school, setSchool] = useState<any | null>(null);
-  const [selected, setSelected] = useState("common_app");
+  const [essayTopics, setEssayTopics] = useState<any | null>(null);
+  const [selected, setSelected] = useState("0");
 
   useEffect(() => {
     if (!schoolId) return;
+    
+    // 학교 기본 정보 가져오기 (mock data)
     fetchSchoolById(schoolId)
       .then(setSchool)
       .catch(() => setSchool(null));
+    
+    // 에세이 토픽 가져오기 (API)
+    fetchEssayTopics(schoolId)
+      .then(setEssayTopics)
+      .catch(() => setEssayTopics(null));
   }, [schoolId]);
 
   if (!school) return <div>Loading...</div>;
@@ -30,14 +39,16 @@ export default function EssayPage() {
       <Container>
         <LeftColumn>
           <Topics
-            commonApp={school.essays.common_app}
-            supplementary={school.essays.supplementary}
+            supplementary={essayTopics?.supplementary || school.essays.supplementary}
             selected={selected}
             onSelectTopic={setSelected}
           />
         </LeftColumn>
         <CenterColumn>
-          <EssayText title={selected} text={formatTitle(selected)} />
+          <EssayText 
+            title={selected} 
+            text={essayTopics?.supplementary?.[selected] || formatTitle(selected)} 
+          />
         </CenterColumn>
         <RightColumn>
           <ChatBox />

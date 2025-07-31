@@ -50,8 +50,8 @@ export default function SchoolPage() {
       <ContentWrapper>
         <LeftColumn>
           <EssayList
-            commonApp={essayTopics?.common_app || data.essays.common_app}
             supplementary={essayTopics?.supplementary || data.essays.supplementary}
+            groupEssays={essayTopics?.groupEssays || []}
           />
           <ImportanceTable data={data.essays.importance_table} />
         </LeftColumn>

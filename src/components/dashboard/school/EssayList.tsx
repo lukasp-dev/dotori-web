@@ -2,37 +2,90 @@
 
 import styled from "styled-components";
 import { useRouter, useParams } from "next/navigation";
+import { useState } from "react";
+import EssayTopicModal from "@/components/dashboard/school/EssayTopicModal";
 
 interface EssayListProps {
-  commonApp: string;
   supplementary: { [key: string]: string };
+  groupEssays?: any[];
 }
 
-export default function EssayList({ commonApp, supplementary }: EssayListProps) {
+export default function EssayList({ supplementary, groupEssays = [] }: EssayListProps) {
   const router = useRouter();
   const params = useParams();
   const schoolId = params.school;
+  const [selectedEssay, setSelectedEssay] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleGoEssay = () => {
     router.push(`/dashboard/${schoolId}/essay`);
   };
 
+  const handleEssayClick = (key: string) => {
+    setSelectedEssay(key);
+    setIsModalOpen(true);
+  };
+
+  const getEssayTopic = (key: string) => {
+    // Group essay인지 확인
+    if (key.startsWith('group-')) {
+      const groupIndex = parseInt(key.split('-')[1]);
+      const group = groupEssays[groupIndex];
+      if (group && group.essays && group.essays.length > 0) {
+        // 모든 에세이 토픽을 하나의 문자열로 결합
+        return group.essays.map((essay: any, index: number) => 
+          `Essay ${index + 1}: ${essay.topic}`
+        ).join('\n\n');
+      }
+    }
+    // Supplementary essay
+    return supplementary[key];
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedEssay(null);
+  };
+
   return (
     <Wrapper>
       <Title>Essays</Title>
-      <EssayButton>
-        <strong>Common App Essay</strong>
-        <SubText>{commonApp || "Obstacle or Challenge"}</SubText>
-      </EssayButton>
 
+      {/* Supplementary Essays */}
       {Object.entries(supplementary).map(([key, value], index) => (
-        <EssayButton key={key}>
+        <EssayButton 
+          key={key} 
+          onClick={() => handleEssayClick(key)}
+          $clickable={value !== "This school has no supplementary essays"}
+        >
           <strong>{`Supplementary Essay ${index + 1}`}</strong>
-          <SubText>{value || "Optional Prompt"}</SubText>
+          <SubText>{value === "This school has no supplementary essays" ? value : "Click to view essay topic"}</SubText>
+        </EssayButton>
+      ))}
+
+      {/* Choice-based Essays */}
+      {groupEssays && groupEssays.length > 0 && groupEssays.map((group: any, groupIndex: number) => (
+        <EssayButton 
+          key={`group-${groupIndex}`}
+          onClick={() => handleEssayClick(`group-${groupIndex}`)}
+          $clickable={true}
+        >
+          <strong>Choice-based Essay</strong>
+          <SubText>Click to view essay topics</SubText>
         </EssayButton>
       ))}
 
       <GoButton onClick={handleGoEssay}>go to essay</GoButton>
+
+      {isModalOpen && selectedEssay && (
+        <EssayTopicModal
+          essayKey={selectedEssay}
+          essayTopic={getEssayTopic(selectedEssay)}
+          groupEssays={groupEssays}
+          onClose={handleCloseModal}
+
+        />
+      )}
     </Wrapper>
   );
 }
@@ -56,7 +109,7 @@ const Title = styled.h3`
   color: ${(props) => props.theme.colors.textPrimary};
 `;
 
-const EssayButton = styled.div`
+const EssayButton = styled.div<{ $clickable: boolean }>`
   font-family: var(--font-fredoka);
   font-size: 20px;
   font-weight: 300;
@@ -69,6 +122,14 @@ const EssayButton = styled.div`
   text-align: center;
   background-color: #fff;
   transition: all 0.2s ease;
+  cursor: ${props => props.$clickable ? 'pointer' : 'default'};
+  
+  ${props => props.$clickable && `
+    &:hover {
+      background-color: ${props.theme.colors.lightGreen};
+      transform: translateY(-2px);
+    }
+  `}
 `;
 
 const SubText = styled.div`
@@ -77,6 +138,8 @@ const SubText = styled.div`
   color: ${(props) => props.theme.colors.textSecondary};
   margin-top: 6px;
 `;
+
+
 
 const GoButton = styled.button`
   margin-top: 2rem;
