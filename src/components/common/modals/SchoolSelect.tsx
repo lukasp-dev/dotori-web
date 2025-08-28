@@ -6,6 +6,7 @@ interface SchoolSelectProps {
   onSelect: (schoolId: number[]) => void;
   selectedSchools: number[];
 }
+
 interface School {
   label: string;
   value: number;
@@ -27,11 +28,11 @@ const SchoolSelect = ({ onSelect, selectedSchools }: SchoolSelectProps) => {
         console.error("Error fetching schools:", error);
         console.error("Error details:", error.response?.data || error.message);
       });
-    }, []);
+  }, []);
 
-    const selectedOptions = schoolOptions.filter(opt =>
-      selectedSchools.includes(opt.value)
-    );
+  const selectedOptions = schoolOptions.filter(opt =>
+    selectedSchools.includes(opt.value)
+  );
 
   return (
     <Select
@@ -39,8 +40,13 @@ const SchoolSelect = ({ onSelect, selectedSchools }: SchoolSelectProps) => {
       options={schoolOptions}
       value={selectedOptions}
       onChange={(selectedOptions) => {
-        const values = selectedOptions.map(opt => opt.value);
-        onSelect(values); 
+        // 타입 안전성 확보
+        if (selectedOptions && Array.isArray(selectedOptions)) {
+          const values = selectedOptions.map(opt => opt.value);
+          onSelect(values);
+        } else {
+          onSelect([]); // 빈 배열 전달
+        }
       }}
       placeholder="Select schools..."
     />

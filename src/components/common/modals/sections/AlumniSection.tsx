@@ -36,8 +36,8 @@ const OptionButton = styled.button<{ selected: boolean }>`
 interface AlumniSectionProps {
   hasAlumniRelation: boolean | null;
   setHasAlumniRelation: (b: boolean) => void;
-  alumniSchool: number;
-  setAlumniSchool: (id: number) => void;
+  alumniSchool: number[];
+  setAlumniSchool: (ids: number[]) => void;
 }
 
 const AlumniSection = ({
@@ -47,8 +47,7 @@ const AlumniSection = ({
   setAlumniSchool,
 }: AlumniSectionProps) => {
   const handleSelect = (schoolId: number[]) => {
-    // 첫 번째 선택된 학교의 ID만 사용
-    setAlumniSchool(schoolId.length > 0 ? schoolId[0] : 0);
+    setAlumniSchool(schoolId); // 배열 그대로 저장
   };
 
   return (
@@ -72,7 +71,7 @@ const AlumniSection = ({
       {hasAlumniRelation === true && (
         <SchoolSelect
           onSelect={handleSelect}
-          selectedSchools={alumniSchool > 0 ? [alumniSchool] : []}
+          selectedSchools={alumniSchool}
         />
       )}
     </>

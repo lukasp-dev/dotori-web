@@ -27,12 +27,11 @@ export default function EssayList({ supplementary, groupEssays = [] }: EssayList
   };
 
   const getEssayTopic = (key: string) => {
-    // Group essay인지 확인
+    // Conditional check for group essay
     if (key.startsWith('group-')) {
       const groupIndex = parseInt(key.split('-')[1]);
       const group = groupEssays[groupIndex];
       if (group && group.essays && group.essays.length > 0) {
-        // 모든 에세이 토픽을 하나의 문자열로 결합
         return group.essays.map((essay: any, index: number) => 
           `Essay ${index + 1}: ${essay.topic}`
         ).join('\n\n');
@@ -63,7 +62,7 @@ export default function EssayList({ supplementary, groupEssays = [] }: EssayList
         </EssayButton>
       ))}
 
-      {/* Choice-based Essays */}
+      {/* Group Essays */}
       {groupEssays && groupEssays.length > 0 && groupEssays.map((group: any, groupIndex: number) => (
         <EssayButton 
           key={`group-${groupIndex}`}
