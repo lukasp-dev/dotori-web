@@ -18,10 +18,10 @@ interface EssayOption {
 export default function EssayTopicModal({ essayKey, essayTopic, groupEssays, onClose }: EssayTopicModalProps) {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   
-  // essayKey가 group-으로 시작하면 choice-based essay
+  // check group essay
   const isChoiceBased = essayKey.startsWith('group-');
   
-  // choice-based essay인 경우 해당 group의 토픽들을 가져오기
+  // Get topics from group essay
   const essayOptions: EssayOption[] = isChoiceBased ? 
     (() => {
       const groupIndex = parseInt(essayKey.split('-')[1]);
@@ -150,8 +150,6 @@ const Title = styled.h2`
   color: ${(props) => props.theme.colors.textPrimary};
   margin: 0;
 `;
-
-
 
 const CloseButton = styled.button`
   background: none;

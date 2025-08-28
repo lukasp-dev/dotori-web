@@ -1,6 +1,7 @@
 "use client";
 
 import styled from "styled-components";
+import { useRouter, useParams } from "next/navigation";
 
 interface EssayListProps {
   supplementary: { [key: string]: string };
@@ -13,6 +14,14 @@ interface EssayButtonProps {
 }
 
 export default function EssayList({ supplementary, selected, onSelectTopic }: EssayListProps) {
+  const router = useRouter();
+  const params = useParams();
+  const schoolId = params.school;
+
+  const handleGoToDashboard = () => {
+    router.push(`/dashboard/${schoolId}`);
+  };
+
   return (
     <Wrapper>
       <Title>Topics</Title>
@@ -27,7 +36,7 @@ export default function EssayList({ supplementary, selected, onSelectTopic }: Es
         </EssayButton>
       ))}
 
-      <GoButton>go to dashboard</GoButton>
+      <GoButton onClick={handleGoToDashboard}>go to dashboard</GoButton>
     </Wrapper>
   );
 }

@@ -52,13 +52,11 @@ interface EssayViewerProps {
 export default function EssayViewer({ title, text }: EssayViewerProps) {
   const [value, setValue] = useState("");
 
-  // Handle LocalStorage - 에세이 내용만 저장
   useEffect(() => {
     const saved = localStorage.getItem(`essay_content_${title}`);
     setValue(saved || "");
   }, [title]);
 
-  // Save to LocalStorage when user types - 에세이 내용만 저장
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
     setValue(newValue);

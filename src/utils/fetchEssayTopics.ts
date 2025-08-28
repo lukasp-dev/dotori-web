@@ -6,7 +6,7 @@ export async function fetchEssayTopics(schoolId: number) {
     
     if (!response.ok) {
       if (response.status === 404) {
-        // 에세이 토픽이 없는 경우 기본값 반환
+        // Return default value when no topics are found
         return {
           supplementary: {
             "0": "This school has no supplementary essays"
@@ -19,7 +19,6 @@ export async function fetchEssayTopics(schoolId: number) {
 
     const data = await response.json();
     
-    // 새로운 API 응답 형식을 기존 구조로 변환
     const result = {
       supplementary: {} as { [key: string]: string },
       groupEssays: data.groupEssays || []
@@ -27,7 +26,7 @@ export async function fetchEssayTopics(schoolId: number) {
 
     let essayIndex = 0;
 
-    // individualEssays 처리 (Supplementary Essay 1, 2, 3...)
+    // Individual Essays
     if (data.individualEssays && data.individualEssays.length > 0) {
       data.individualEssays.forEach((essay: any) => {
         result.supplementary[essayIndex.toString()] = essay.topic;
@@ -35,10 +34,7 @@ export async function fetchEssayTopics(schoolId: number) {
       });
     }
 
-    // groupEssays는 별도로 유지 (supplementary에 추가하지 않음)
-    // groupEssays는 이미 result.groupEssays에 포함되어 있음
-
-    // 데이터가 없으면 기본값 반환
+    // Default value when no topics are found
     if (Object.keys(result.supplementary).length === 0) {
       return {
         supplementary: {
@@ -51,7 +47,7 @@ export async function fetchEssayTopics(schoolId: number) {
     return result;
   } catch (error) {
     console.error("Error fetching essay topics:", error);
-    // 에러 발생 시 기본값 반환
+    // Error handling
     return {
       supplementary: {
         "0": "This school has no supplementary essays"
