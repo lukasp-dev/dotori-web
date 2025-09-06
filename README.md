@@ -76,6 +76,7 @@ Deploy easily with [Vercel](https://vercel.com/).
 
 ### Backend & Database
 - **Next.js API Routes** for serverless backend functionality
+- **Spring Boot API Server** for core business logic and data processing
 - **PostgreSQL** with **Prisma ORM** for data persistence
 - **NextAuth.js** for authentication with Google OAuth and credentials
 - **Google Cloud Storage** for file uploads (resumes, documents)
@@ -90,7 +91,52 @@ Deploy easily with [Vercel](https://vercel.com/).
 
 ## 🎯 Core Features & Implementation
 
-### 1. User Authentication System
+### 1. Spring Boot API Integration
+
+**Implementation Details:**
+- **Axios Configuration** (`src/lib/api.ts`):
+  ```typescript
+  const api = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL, // Spring Boot server
+    withCredentials: true,
+  });
+  
+  // Request interceptor for JWT tokens
+  api.interceptors.request.use((config) => {
+    const token = getAccessToken();
+    if (token && config.headers) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
+  
+  // Response interceptor for token refresh
+  api.interceptors.response.use(
+    (res) => res,
+    async (error) => {
+      if (error.response?.status === 401 && !originalRequest._retry) {
+        const { accessToken } = await refreshAccessToken();
+        setAccessToken(accessToken);
+        return api(originalRequest);
+      }
+      return Promise.reject(error);
+    }
+  );
+  ```
+
+- **Authentication API Calls**:
+  - Login: `POST /api/auth/login`
+  - Signup: `POST /api/auth/signup`
+  - Logout: `POST /api/auth/logout`
+  - Token Refresh: `POST /api/auth/refresh`
+  - Social Login: `POST /api/auth/social-login`
+
+- **File Upload API**:
+  - Resume Upload: `POST /api/upload/resume`
+  - Personal Info: `POST /api/uploadPersonalInfo`
+  - User Data: `GET /api/upload/{userId}`
+
+### 2. User Authentication System
 
 **Implementation Details:**
 - **NextAuth.js Configuration** (`src/lib/social-auth/googleAuth.ts`):
@@ -142,7 +188,7 @@ Deploy easily with [Vercel](https://vercel.com/).
   }
   ```
 
-### 2. AI-Powered College Recommendation System
+### 3. AI-Powered College Recommendation System
 
 **Implementation Details:**
 - **Redux State Management** (`src/store/demoSchoolsSlice.ts`):
@@ -182,7 +228,7 @@ Deploy easily with [Vercel](https://vercel.com/).
   </RadarChart>
   ```
 
-### 3. Application Flow Management
+### 4. Application Flow Management
 
 **Implementation Details:**
 - **Admission Flow Controller** (`src/components/AdmissionFlow.tsx`):
@@ -216,7 +262,7 @@ Deploy easily with [Vercel](https://vercel.com/).
   - Local storage persistence for user progress
   - Conditional rendering based on completion status
 
-### 4. Resume Management System
+### 5. Resume Management System
 
 **Implementation Details:**
 - **Google Cloud Storage Integration** (`src/app/api/resume/route.ts`):
@@ -249,7 +295,7 @@ Deploy easily with [Vercel](https://vercel.com/).
   - Signed URL generation for secure access
   - User-specific file organization (`resumes/${userId}/resume`)
 
-### 5. Essay Management System
+### 6. Essay Management System
 
 **Implementation Details:**
 - **Essay List Component** (`src/components/dashboard/school/EssayList.tsx`):
@@ -281,7 +327,7 @@ Deploy easily with [Vercel](https://vercel.com/).
   }
   ```
 
-### 6. Shopping Cart & Payment System
+### 7. Shopping Cart & Payment System
 
 **Implementation Details:**
 - **Redux Cart Management** (`src/store/cartSlice.ts`):
@@ -313,7 +359,7 @@ Deploy easily with [Vercel](https://vercel.com/).
   - Resume Builder: $15
   - Essay Helper: $100 per college
 
-### 7. Dashboard & Progress Tracking
+### 8. Dashboard & Progress Tracking
 
 **Implementation Details:**
 - **Progress State Management** (`src/store/dashboard/progressSlice.ts`):
@@ -345,7 +391,7 @@ Deploy easily with [Vercel](https://vercel.com/).
   };
   ```
 
-### 8. Responsive Design & Styling
+### 9. Responsive Design & Styling
 
 **Implementation Details:**
 - **Styled Components Theme System** (`src/styles/theme.ts`):
@@ -427,6 +473,10 @@ GOOGLE_CLIENT_SECRET="your-google-client-secret"
 # Google Cloud Storage
 NEXT_PUBLIC_PROJECT_ID="your-gcp-project-id"
 NEXT_PUBLIC_STORAGE_BUCKET_NAME="your-gcs-bucket-name"
+
+# Backend API
+NEXT_PUBLIC_API_BASE_URL="http://localhost:8080"
+NEXT_PUBLIC_API_URL="http://localhost:8080"
 ```
 
 **⚠️ Security Note:** Never commit actual credentials to version control. Use placeholder values in your `.env.local` file and keep real credentials secure.
