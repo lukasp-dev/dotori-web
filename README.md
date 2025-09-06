@@ -418,16 +418,18 @@ DATABASE_URL="postgresql://username:password@localhost:5432/dotori_db"
 
 # NextAuth
 NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_SECRET="your-nextauth-secret-key"
 
 # Google OAuth
 GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
 
 # Google Cloud Storage
-NEXT_PUBLIC_PROJECT_ID="your-project-id"
-NEXT_PUBLIC_STORAGE_BUCKET_NAME="your-bucket-name"
+NEXT_PUBLIC_PROJECT_ID="your-gcp-project-id"
+NEXT_PUBLIC_STORAGE_BUCKET_NAME="your-gcs-bucket-name"
 ```
+
+**⚠️ Security Note:** Never commit actual credentials to version control. Use placeholder values in your `.env.local` file and keep real credentials secure.
 
 ---
 
