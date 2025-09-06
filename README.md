@@ -1,10 +1,48 @@
+# 🌰 Dotori-Frontend
+
+> **Equal Opportunities for Students at a Fair Price.**
+> Smart help. Honest prices. Real opportunity.
+
+---
+
+## Repositories
+
+* Backend: [dotori-backend](https://github.com/lukasp-dev/dotori-backend)
+* API: [dotori-fastapi](https://github.com/lukasp-dev/dotori-fastapi)
+* Data: [dotori-data](https://github.com/lukasp-dev/dotori-data)
+
+---
+
+## Why Dotori?
+
+Navigating college admissions—especially abroad—can be stressful, confusing, and far too expensive.
+Agencies charge steep fees for services as simple as essay review, leaving many students without affordable guidance.
+
+**Dotori changes this.**
+We provide **24/7 AI-powered essay feedback**, **resume-driven prompts**, and a **final human review**, all at a fair price.
+Built by students, for students—because your story deserves to be written, not priced.
+
+---
+
+## Features
+
+* **AI Essay Feedback** – Get instant corrections and suggestions, anytime.
+* **Resume-Driven Prompts** – Essay ideas tailored to your unique background.
+* **Final Human Review** – Real experts ensure your voice stays authentic.
+* **Dream School Guidance** – Strategic advice on where to apply.
+* **School Analysis** – Data-driven insights into universities.
+* **Alumni Connections** – Talk directly with peers and graduates.
+
+---
+
+## Getting Started (Frontend – Next.js)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
-
-First, run the development server:
+Run the development server:
 
 ```bash
+npm install
 npm run dev
 # or
 yarn dev
@@ -14,23 +52,34 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
+You can start editing by modifying `app/page.tsx` — the page auto-updates as you save.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To learn more:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* [Next.js Documentation](https://nextjs.org/docs)
+* [Learn Next.js](https://nextjs.org/learn)
 
-## Learn More
+Deploy easily with [Vercel](https://vercel.com/).
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Members
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* **Jehoon Park** — Founder / SWE (Univ. of Minnesota Twin Cities)
+* **Jewook Park** — Co-Founder / SWE (Georgia Tech)
+* **Seoyoon Ham** — Co-Founder / Data Engineer (NYU)
+* **Jiyoon Shin** — Co-Founder / Data Engineer (Yonsei Univ.)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contact
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Company: **dotori**
+* Email: **[dotoripack@gmail.com](mailto:dotoripack@gmail.com)**
+* Location: Minneapolis
+* LinkedIn: [Dotori LinkedIn](https://www.linkedin.com/company/dotoripack/about/?viewAsMember=true)
+
+---
+
+👉 원래 `Getting Started`는 프론트 기준 Next.js 설명인데, 지금 `Repositories`만 백엔드로 바꿔둔 상태야. 그대로 둘까, 아니면 `Getting Started`도 백엔드 세팅 방식(Maven/Spring Boot or FastAPI)으로 맞춰줄까?
