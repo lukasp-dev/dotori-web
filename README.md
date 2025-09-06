@@ -64,7 +64,7 @@ Deploy easily with [Vercel](https://vercel.com/).
 
 ---
 
-## 🏗️ Architecture & Tech Stack
+## Architecture & Tech Stack
 
 ---
 
@@ -104,7 +104,7 @@ Deploy easily with [Vercel](https://vercel.com/).
 
 ---
 
-## 🎯 Core Features & Implementation
+## Core Features & Implementation
 
 ### 1. Spring Boot API Integration
 
