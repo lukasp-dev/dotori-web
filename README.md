@@ -66,20 +66,35 @@ Deploy easily with [Vercel](https://vercel.com/).
 
 ## 🏗️ Architecture & Tech Stack
 
-### Frontend Stack
-- **Next.js 15** with App Router for server-side rendering and routing
-- **React 19** with TypeScript for type-safe component development
-- **Styled Components** for CSS-in-JS styling with theme support
-- **Redux Toolkit** for state management across the application
-- **Framer Motion** for smooth animations and transitions
-- **Recharts** for data visualization (matching score charts)
+---
+
+### Frontend
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="20"/> **Next.js 15** with App Router for SSR & routing
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="20"/> **React 19** + <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="20"/> **TypeScript** for type-safe development
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/styledcomponents/styledcomponents-original.svg" width="20"/> **Styled Components** for CSS-in-JS styling
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" width="20"/> **Redux Toolkit** for global state management
+
+<img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/framer.svg" width="20"/> **Framer Motion** for animations
+
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FFISsJ%2FbtquotFH0Kb%2FAAAAAAAAAAAAAAAAAAAAAMbSSx--YREm5gFOUKcd5JLLkyAYBWIBpBFNGCDf9okB%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1759244399%26allow_ip%3D%26allow_referer%3D%26signature%3D%252FoJVO83EwDQpOlI2YQCISt7OJvg%253D" width="20"/> **Recharts** for data visualization
 
 ### Backend & Database
-- **Next.js API Routes** for serverless backend functionality
-- **Spring Boot API Server** for core business logic and data processing
-- **PostgreSQL** with **Prisma ORM** for data persistence
-- **NextAuth.js** for authentication with Google OAuth and credentials
-- **Google Cloud Storage** for file uploads (resumes, documents)
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="20"/> **Next.js API Routes** for serverless backend
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="20"/> **Spring Boot** API server
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="20"/> **PostgreSQL** + <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg" width="20"/> **Prisma ORM**
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="20"/> **NextAuth.js** (Google OAuth + credentials)
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" width="20"/> **Google Cloud Storage** for file uploads
+
+
 
 ### Authentication & Security
 - **NextAuth.js** with Prisma adapter for session management
