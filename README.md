@@ -8,7 +8,7 @@
 ## Repositories
 
 * Backend: [dotori-backend](https://github.com/lukasp-dev/dotori-backend)
-* API: [dotori-fastapi](https://github.com/lukasp-dev/dotori-fastapi)
+* AI Server: [dotori-fastapi](https://github.com/lukasp-dev/dotori-fastapi)
 * Data: [dotori-data](https://github.com/lukasp-dev/dotori-data)
 
 ---
